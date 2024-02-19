@@ -51,6 +51,12 @@ export class MyScene extends CGFscene {
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+
+    // TP1 - Ex 1 - Part 4 - Additional light
+    this.lights[1].setPosition(-30, -2, -5, -1);
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[1].enable();
+    this.lights[1].update();
   }
   initCameras() {
     this.camera = new CGFcamera(
