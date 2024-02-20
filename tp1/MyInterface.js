@@ -29,7 +29,10 @@ export class MyInterface extends CGFinterface {
 
         // TP1 - Ex 1 - Part 4
         this.gui.add(this.scene, 'visibilityParallelogram').name('Visibility Parallelogram');
-
+       
+        // TP1 -Ex2
+        this.gui.add(this.scene, 'visibilityTriangleSmall').name('Visibility Triangle Small');
+        this.gui.add(this.scene, 'visibilityTriangleBig').name('Visibility Triangle Big');
         // Adjust the size of the controls interface
         this.gui.width = 300;
 
