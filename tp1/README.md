@@ -1,6 +1,6 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T08G04
 
 ## TP 1 Notes
 
@@ -15,6 +15,9 @@ This is the Diamond that was already implemented:
 Then on Ex1 we implemented the rectangular triangle "MyTriangle" and the parallelogram "MyParallelogram" and the Gui to show/hide the figures:
 ![Screenshot 2](screenshots/CG-t08g04tp1-2.png.)
 ![Screenshot 3](screenshots/CG-t08g04tp1-3.png.)
+
+- We observed a few visual glitches in the parallelogram when we called the `display` function before the `setDefaultAppearance` function before we corrected it.
+- We also had to augment the width of the controls panel to fit the text of the labels.
 
 On Ex 2 we had a better understanding on how to create the figures so we came up with "MyTriangleSmall" & "MyTriangleBig" easily and also added a Gui to show/hide the figures like in Ex1:
 ![Screenshot 4](screenshots/CG-t08g04tp1-4.png.)

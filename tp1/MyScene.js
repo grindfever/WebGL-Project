@@ -36,9 +36,11 @@ export class MyScene extends CGFscene {
 
     // TP1 - Ex 1 - Part 3
     this.parallelogram = new MyParallelogram(this);
+
     // TP1 - Ex2
-    this.trianglesmall = new MyTriangleSmall(this);
-    this.trianglebig = new MyTriangleBig(this);
+    this.triangleSmall = new MyTriangleSmall(this);
+    this.triangleBig = new MyTriangleBig(this);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -49,9 +51,10 @@ export class MyScene extends CGFscene {
 
     // TP1 - Ex 1 - Part 3
     this.visibilityParallelogram = true;
+
     //TP1 -Ex2
-    this.visibilityTriangleSmall=true;
-    this.visibilityTriangleBig=true;
+    this.visibilityTriangleSmall = true;
+    this.visibilityTriangleBig = true;
   }
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1);
@@ -85,9 +88,11 @@ export class MyScene extends CGFscene {
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
+    
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
@@ -127,8 +132,9 @@ export class MyScene extends CGFscene {
     if (this.visibilityParallelogram) this.parallelogram.display();
 
     //TP1- Ex2
-    if (this.visibilityTriangleSmall) this.trianglesmall.display();
-    if (this.visibilityTriangleBig) this.trianglebig.display();
+    if (this.visibilityTriangleSmall) this.triangleSmall.display();
+    if (this.visibilityTriangleBig) this.triangleBig.display();
+    
     // ---- END Primitive drawing section
   }
 }

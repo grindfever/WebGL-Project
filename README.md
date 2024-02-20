@@ -1,6 +1,6 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T08G04
 | Name              | Number    | E-Mail             |
 | ----------------- | --------- | ------------------ |
 | Diogo Santos      | 202009291 | up202009291@up.pt  |
