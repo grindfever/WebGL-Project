@@ -22,4 +22,3 @@ Then on Ex1 we implemented the rectangular triangle "MyTriangle" and the paralle
 On Ex 2 we had a better understanding on how to create the figures so we came up with "MyTriangleSmall" & "MyTriangleBig" easily and also added a Gui to show/hide the figures like in Ex1:
 ![Screenshot 4](screenshots/CG-t08g04tp1-4.png.)
 ![Screenshot 5](screenshots/CG-t08g04tp1-5.png.)
-

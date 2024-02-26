@@ -1,7 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyParallelogram } from "./MyParallelogram.js";
-import { MySquare } from "./MySquare.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -28,9 +26,9 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
 
-    this.triangle = new MyTriangle(this);
-    this.parallelogram = new MyParallelogram(this);
-    this.square = new MySquare(this);
+    // TP2 - Tangram
+    this.tangram = new MyTangram(this);
+    this.displayTangram = true;
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -105,51 +103,7 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     // TP2 - Tangram
-    // Purple Triangle
-    this.pushMatrix();
-    this.translate(0, -2, 0);
-    this.triangle.display();
-    this.popMatrix();
-
-    // Orange Triangle
-    this.pushMatrix();
-    this.translate(1, -1, 0);
-    this.rotate(Math.PI, 0, 0, 1);
-    this.scale(2, 2, 2);
-    this.triangle.display();
-    this.popMatrix();
-
-    // Blue Triangle
-    this.pushMatrix();
-    this.translate(0, -2, 0);
-    this.rotate(-Math.PI / 2, 0, 0, 1);
-    this.scale(2, 2, 2);
-    this.triangle.display();
-    this.popMatrix();
-
-    // Pink Triangle
-    this.pushMatrix();
-    this.rotate(Math.PI / 2, 0, 0, 1);
-    this.scale(1.5, 1.5, 1.5);
-    this.triangle.display();
-    this.popMatrix();
-
-    // Red Triangle
-    this.triangle.display();
-
-    // Green Square
-    this.pushMatrix();
-    this.translate(-0.75, 1.5, 0);
-    this.square.display();
-    this.popMatrix();
-
-    // Yellow Parallelogram
-    this.pushMatrix();
-    this.translate(0, 3, 0);
-    this.scale(1, -1, 1);
-    this.rotate((-3 * Math.PI) / 5, 0, 0, 1);
-    this.parallelogram.display();
-    this.popMatrix();
+    if (this.displayTangram) this.tangram.display();
     
     // ---- END Primitive drawing section
   }
