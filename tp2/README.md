@@ -10,4 +10,4 @@
 
 ### Tangram
 
-![Tangram](screenshots\cg-t08g04tp2-1.png)
+![Tangram](screenshots/cg-t08g04tp2-1.png)
