@@ -31,4 +31,3 @@ export class MySquare extends CGFobject {
 		this.initGLBuffers();
 	}
 }
-
