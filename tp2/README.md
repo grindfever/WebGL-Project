@@ -26,4 +26,6 @@
 
 - Creating a square and then rotating it to create another cube was tedious but not hard. And since we alredy had the code needed to transform this new cube, we just had to insert the call to display the new cube right below the call for the first one and voilà, we had two identical cubes in the same place.
 
+### Unitary Cube composed of planes and Tangram
+
 ![Two Cubes and Tangram](screenshots/cg-t08g04-tp2-4.png)
