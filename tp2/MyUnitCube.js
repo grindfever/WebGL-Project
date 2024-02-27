@@ -45,4 +45,3 @@ initBuffers() {
     this.initGLBuffers();
 }
 }
-

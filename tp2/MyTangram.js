@@ -1,7 +1,7 @@
 import { CGFobject } from '../lib/CGF.js';
 import { MyTriangle } from './MyTriangle.js';
 import { MyParallelogram } from './MyParallelogram.js';
-import { MySquare } from './MySquare.js';
+import { MyDiamond } from './MyDiamond.js';
 
 export class MyTangram extends CGFobject {
     constructor(scene) {
@@ -11,7 +11,7 @@ export class MyTangram extends CGFobject {
     init(scene) {
         this.triangle = new MyTriangle(scene);
         this.parallelogram = new MyParallelogram(scene);
-        this.square = new MySquare(scene);
+        this.diamond = new MyDiamond(scene);
     }
     display() {
     // Purple Triangle
@@ -49,7 +49,7 @@ export class MyTangram extends CGFobject {
     // Green Square
     this.scene.pushMatrix();
     this.scene.translate(-0.75, 1.5, 0);
-    this.square.display();
+    this.diamond.display();
     this.scene.popMatrix();
 
     // Yellow Parallelogram

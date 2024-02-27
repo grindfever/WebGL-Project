@@ -1,10 +1,10 @@
 import {CGFobject} from '../lib/CGF.js';
 /**
- * MySquare
+ * MyDiamond
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MySquare extends CGFobject {
+export class MyDiamond extends CGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
