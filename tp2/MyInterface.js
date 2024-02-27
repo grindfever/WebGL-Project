@@ -27,6 +27,11 @@ export class MyInterface extends CGFinterface {
         // TP2 - UnitCube
         this.gui.add(this.scene, 'displayUnitCube').name('Display Unit Cube');
 
+        // TP2 - UnitCubeQuad
+        this.gui.add(this.scene, 'displayUnitCubeQuad').name('Display Unit Cube Quad');
+
+        this.gui.width = 400;
+
         return true;
     }
 }
