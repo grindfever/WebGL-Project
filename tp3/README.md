@@ -11,7 +11,7 @@
 interconnected , we also didn't have time to change the tangram so we left it as it was 
 
 
--In the first exercise we created the normals for the figures we've done on previous TP's so that the calculated luminosity made sense according to the angle of incidence of the light and the viewing angle. We also created a material similar to wood with a low specular component.
+In the first exercise we created the normals for the figures we've done on previous TP's so that the calculated luminosity made sense according to the angle of incidence of the light and the viewing angle. We also created a material similar to wood with a low specular component.
 
 ### WoodCube
 
@@ -23,7 +23,7 @@ Still in exercise 1, we applied several materials with a high specular component
 
 ![Tangram](screenshots/cg-t08g04-tp3-2.png)
 
--In exercise 2 we built a prism with a variable number of sides and complexity. The most challenging part was implementing the most efficient algorithm possible to create vertices, describe the triangle mesh and create normalized normals at each vertex. The calculated lighting was similar to that calculated with Constant Shading since the normals for the same face are the same.
+In exercise 2 we built a prism with a variable number of sides and complexity. The most challenging part was implementing the most efficient algorithm possible to create vertices, describe the triangle mesh and create normalized normals at each vertex. The calculated lighting was similar to that calculated with Constant Shading since the normals for the same face are the same.
 
 ### Prism
 
