@@ -27,8 +27,8 @@ export class MyCone extends CGFobject {
             this.normals.push(Math.cos(ang), Math.cos(Math.PI / 4.0), -Math.sin(ang));
             ang += alphaAng;
         }
-        this.vertices.push(0,1,0);
-        this.normals.push(0,1,0);
+        this.vertices.push(0, 1, 0);
+        this.normals.push(0, 1, 0);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
@@ -39,7 +39,6 @@ export class MyCone extends CGFobject {
      */
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
-
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();

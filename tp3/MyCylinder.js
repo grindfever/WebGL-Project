@@ -11,20 +11,17 @@ export class MyCylinder extends CGFobject {
         this.stacks = stacks;
         this.initBuffers();
     }
-
     initBuffers() {
-
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         
-        for (let z = 0 ; z <= this.stacks ; z += 1) {
+        for (let z = 0 ; z <= this.stacks; z += 1) {
             this.vertices.push(1, 0, z / this.stacks);
             this.normals.push(1, 0, 0);
         }
 
-        for (let i = 1 ; i <= this.slices ; i++) {
-
+        for (let i = 1 ; i <= this.slices; i++) {
             let angle = 2 * Math.PI * i / this.slices;
             let x = Math.cos(angle);
             let y = Math.sin(angle);
@@ -36,9 +33,7 @@ export class MyCylinder extends CGFobject {
             }
 
             for (let j = 1 ; j <= this.stacks ; j++) {
-                
                 if (i != this.slices) {
-
                     let z = j / this.stacks;
                     this.vertices.push(x, y, z);
                     this.normals.push(x / vector_size, y / vector_size, 0);
@@ -49,7 +44,6 @@ export class MyCylinder extends CGFobject {
                     let indexB = indexD - (this.stacks + 1);
                     let indexA = indexB - 1;
                     this.indices.push(indexA, indexC, indexD, indexA, indexD, indexB);
-
                 } else {
 
                     let points = this.vertices.length / 3;
@@ -62,11 +56,14 @@ export class MyCylinder extends CGFobject {
                 }
             }
         }
-
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
 
     updateBuffers(complexity) {
+        this.slices = 5 + Math.round(5 * complexity);
+        // reinitialize buffers
+        this.initBuffers();
+        this.initNormalVizBuffers();
     }
 }

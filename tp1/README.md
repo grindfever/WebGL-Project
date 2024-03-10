@@ -4,7 +4,7 @@
 
 ## TP 1 Notes
 
-- In exercise 1 we observed how MyDiamond was made and learned how to use the coordinates and vertices to create figures using triangles , we still dont know all about WebGl and hope we can later have a better understanding on how all the methods called work. 
+- In exercise 1 we observed how MyDiamond was made and learned how to use the coordinates and vertices to create figures using triangles , we still dont know all about WebGl and hope we can later have a better understanding on how all the methods called work.
 
 - In exercise 1&2 we had difficulties in doing a one sided figure right away we´ve been creating the figure and if it doesnt show up we invert the vertices because we are working with triangles and by inverting the order we get a counterclockwise order of the vertices if they were clockwise before inverting the order, but other than that we found it was very straightforward to understand.
 
