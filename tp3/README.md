@@ -29,7 +29,7 @@ In exercise 2 we built a prism with a variable number of sides and complexity. T
 
 ![MyPrism](screenshots/cg-t08g04-tp3-3.png)
 
--In exercise 3, the normals were placed perpendicular to each edge. This reduces the number of vertices and normals to be calculated. As expected, the lighting transitions on the edges were softened, becoming less apparent and giving a curved appearance to the surface of the previous prism.
+In exercise 3, the normals were placed perpendicular to each edge. This reduces the number of vertices and normals to be calculated. As expected, the lighting transitions on the edges were softened, becoming less apparent and giving a curved appearance to the surface of the previous prism.
 
 
 #### Cylinder
