@@ -7,7 +7,8 @@
 - While creating the Prism, we had some difficulties creating the algorithm to create the vertices and creating the normals for each vertex 
 
 
-- The last object we created was the parallelogram and we left it for last because of the weird rotating angle we knew it would need.
+- We had difficulties on watching the effects light on the different components of the tangram because some of its pieces were 
+interconnected , we also didn't have time to change the tangram so we left it as it was 
 
 
 -In the first exercise we created the normals for the figures we've done on previous TP's so that the calculated luminosity made sense according to the angle of incidence of the light and the viewing angle. We also created a material similar to wood with a low specular component.
