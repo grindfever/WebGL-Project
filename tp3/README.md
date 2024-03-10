@@ -14,7 +14,7 @@
 
 ### WoodCube
 
-![WoodCube](screenshots/cg-t08g04-tp2-1.png)
+![WoodCube](screenshots/cg-t08g04-tp3-1.png)
 
 Still in exercise 1, we applied several materials with a high specular component to the figures present in the tangram.
 
