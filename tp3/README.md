@@ -4,8 +4,6 @@
 
 ## TP 3 Notes
 
-- While creating the Prism, we had some difficulties creating the algorithm to create the vertices and creating the normals for each vertex
-
 - We had difficulties on watching the effects light on the different components of the tangram because some of its pieces were interconnected
 
 In the first exercise we created the normals for the figures we've done on previous TP's so that the calculated luminosity made sense according to the angle of incidence of the light and the viewing angle. We also created a material similar to wood with a low specular component.
