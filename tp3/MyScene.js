@@ -4,9 +4,6 @@ import { MyCone } from "./MyCone.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyUnitCube } from "./MyUnitCube.js";
 import { MyTangram } from "./MyTangram.js";
-import { MyPrism } from "./MyPrism.js";
-import { MyCylinder } from "./MyCylinder.js";
-
 /**
 * MyScene
 * @constructor
@@ -39,16 +36,10 @@ export class MyScene extends CGFscene {
         this.unitCube = new MyUnitCube(this);
         this.tangram = new MyTangram(this);
 
-        // TP3 - Prism design
-        this.prism = new MyPrism(this, 8, 20);
-
-        // TP3 - Cylinder - Gouraud shading application
-        this.cylinder = new MyCylinder(this, 8, 20);
-
-        this.objects = [this.plane, this.pyramid, this.cone, this.unitCube, this.tangram, this.prism, this.cylinder];
+        this.objects = [this.plane, this.pyramid, this.cone, this.unitCube, this.tangram];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'UnitCube': 3, 'Tangram': 4, 'Prism': 5, 'Cylinder': 6 };
+        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'UnitCube': 3, 'Tangram': 4};
 
         //Other variables connected to MyInterface
         this.selectedObject = 6;
@@ -60,7 +51,6 @@ export class MyScene extends CGFscene {
         this.componentIntensity = 0.3;
     }
     initLights() {
-
         this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
 
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
@@ -80,7 +70,6 @@ export class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
-
     hexToRgbA(hex) {
         var ret;
         //either we receive a html/css color or a RGB vector
@@ -101,7 +90,6 @@ export class MyScene extends CGFscene {
             ];
         return ret;
     }
-
     updateCustomMaterial() {
         this.customMaterial.setAmbient(...this.hexToRgbA(this.customMaterialValues['Ambient']));
         this.customMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Diffuse']));
@@ -110,12 +98,9 @@ export class MyScene extends CGFscene {
         this.customMaterial.setShininess(this.customMaterialValues['Shininess']);
 
     };
-
     updateObjectComplexity() {
         this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
     }
-
-
     initMaterials() {
         // Red Ambient (no diffuse, no specular)
         this.material1 = new CGFappearance(this);
@@ -145,13 +130,6 @@ export class MyScene extends CGFscene {
         this.material4.setSpecular(0.3, 0.2, 0.1, 1);
         this.material4.setShininess(10.0);
 
-        // TP3 - Illumination and materials of the tangram
-        this.material4 = new CGFappearance(this);
-        this.material4.setAmbient(0.76, 0.69, 0.5, 1.0);
-        this.material4.setDiffuse(0.6, 0.4, 0.2, 1.0);
-        this.material4.setSpecular(0.3, 0.2, 0.1, 1);
-        this.material4.setShininess(10.0);
-
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -166,10 +144,8 @@ export class MyScene extends CGFscene {
         this.updateCustomMaterial();
 
         this.materials = [this.material1, this.material2, this.material3, this.material4, this.customMaterial];
-        this.materials = [this.material1, this.material2, this.material3, this.material4, this.customMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood': 3, 'Custom': 4};
         this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood': 3, 'Custom': 4};
     }
     display() {
@@ -208,4 +184,3 @@ export class MyScene extends CGFscene {
         // ---- END Primitive drawing section
     }
 }
-

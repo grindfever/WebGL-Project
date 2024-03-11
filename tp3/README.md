@@ -21,13 +21,3 @@ Still in exercise 1, we applied several materials with a high specular component
 ![Tangram](screenshots/cg-t08g04-tp3-2.png)
 
 In exercise 2 we built a prism with a variable number of sides and complexity. The most challenging part was implementing the most efficient algorithm possible to create vertices, describe the triangle mesh and create normalized normals at each vertex. The calculated lighting was similar to that calculated with Constant Shading since the normals for the same face are the same.
-
-### Prism
-
-![MyPrism](screenshots/cg-t08g04-tp3-3.png)
-
-In exercise 3, the normals were placed perpendicular to each edge. This reduces the number of vertices and normals to be calculated. As expected, the lighting transitions on the edges were softened, becoming less apparent and giving a curved appearance to the surface of the previous prism.
-
-#### Cylinder
-
-![MyCylinder](screenshots/cg-t08g04-tp3-4.png)
