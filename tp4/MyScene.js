@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
-
+import {MyUnitCubeQuad} from "./MyUnitCubeQuad.js";
+import {MyTangram} from "./MyTangram.js";
 /**
  * MyScene
  * @constructor
@@ -27,6 +28,8 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
+        this.unitcubequad= new MyUnitCubeQuad(this);
+        this.tangram=new MyTangram(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -36,12 +39,22 @@ export class MyScene extends CGFscene {
         this.quadMaterial.setShininess(10.0);
         this.quadMaterial.loadTexture('images/default.png');
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+        //diamond material 
+        this.diamondMaterial = new CGFappearance(this);
+        this.diamondMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.diamondMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.diamondMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.diamondMaterial.setShininess(10.0);
+        this.diamondMaterial.loadTexture('images/tangram.png');
+        this.diamondMaterial.setTextureWrap('REPEAT', 'REPEAT');
         //------
 
         //------ Textures
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.texture4 = new CGFtexture(this, 'images/tangram.png')
         //-------
 
         //-------Objects connected to MyInterface
@@ -82,16 +95,19 @@ export class MyScene extends CGFscene {
     //Function that resets selected texture in quadMaterial
     updateAppliedTexture() {
         this.quadMaterial.setTexture(this.textures[this.selectedTexture]);
+        this.diamondMaterial.setTexture(this.textures[this.selectedTexture]);
     }
 
     //Function that updates wrapping mode in quadMaterial
     updateTextureWrapping() {
         this.quadMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
+        this.diamondMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
     }
 
     //Function that updates texture coordinates in MyQuad
     updateTexCoords() {
         this.quad.updateTexCoords(this.texCoords);
+        this.tangram.updateTexCoords(this.texCoords);
     }
 
     display() {
@@ -117,6 +133,7 @@ export class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         this.quadMaterial.apply();
+        this.diamondMaterial.apply();
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
@@ -124,7 +141,9 @@ export class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
+        //this.quad.display();
+        //this.unitcubequad.display();
+        this.tangram.display();
 
         // ---- END Primitive drawing section
     }
