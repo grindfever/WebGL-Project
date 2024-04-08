@@ -1,16 +1,17 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
  * MyTriangle
  * @constructor
  * @param scene - Reference to MyScene object
  */
 export class MyTriangle extends CGFobject {
-	constructor(scene) {
-		super(scene);
-		this.initBuffers();
-	}
-	initBuffers() {
-		this.vertices = [
+    constructor(scene, textureCoords) {
+        super(scene);
+        this.texCoords = textureCoords;
+        this.initBuffers();
+    }
+    initBuffers() {
+        this.vertices = [
 			0, 0, 0,	//0
 			1, 1, 0,	//1
 			1, -1, 0,   //2
@@ -34,9 +35,9 @@ export class MyTriangle extends CGFobject {
             0, 0, -1    // normal to vertex 2
 		];
 
-		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
-		this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
-	}
+        //The defined indices (and corresponding vertices)
+        //will be read in groups of three to draw triangles
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers();
+    }
 }
