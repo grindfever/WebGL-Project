@@ -52,8 +52,7 @@ export class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayQuad = true;
         this.displayTangram = false
-        this.displayCube = true;
-        this.scaleFactor = 5;
+        this.scaleFactor = 3;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
@@ -72,10 +71,14 @@ export class MyScene extends CGFscene {
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
-        this.lights[1].setPosition(-30, -2, -5, -1);
+        this.lights[1].setPosition(-15, -2, -5, -1);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[1].enable();
         this.lights[1].update();
+        this.lights[2].setPosition(-5, -15, -10, -1);
+        this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[2].enable();
+        this.lights[2].update();
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -99,7 +102,6 @@ export class MyScene extends CGFscene {
         this.quad.updateTexCoords(this.texCoords);
     }
     display() {
-  
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -127,10 +129,6 @@ export class MyScene extends CGFscene {
 
         if (this.displayTangram) {
             this.tangram.display();
-        }
-
-        if (this.displayCube) {
-            //this.cube.display();
         }
 
         // ---- END Primitive drawing section
