@@ -12,8 +12,8 @@
 
 ---
 
-### Placeholder
+### Unit Cube
 
-- Placeholder
+- Applying the textures to the cube's faces was not that hard and, using the command that was previously in the `MyScene.js` file, magnifying the texture without streching it was easy.
 
-![Placeholder](screenshots/cg-t08g04-tp4-2.png)
+![UnitCude](screenshots/cg-t08g04-tp4-2.png)

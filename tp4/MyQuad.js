@@ -12,7 +12,6 @@ export class MyQuad extends CGFobject {
 		if (coords != undefined)
 			this.updateTexCoords(coords);
 	}
-	
 	initBuffers() {
 		this.vertices = [
 			-0.5, -0.5, 0,	//0
@@ -24,9 +23,7 @@ export class MyQuad extends CGFobject {
 		//Counter-clockwise reference of vertices
 		this.indices = [
 			0, 1, 2,
-			1, 3, 2,
-			//2,1,0,
-			//2,3,1
+			1, 3, 2
 		];
 
 		//Facing Z positive
@@ -56,7 +53,6 @@ export class MyQuad extends CGFobject {
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
-
 	/**
 	 * @method updateTexCoords
 	 * Updates the list of texture coordinates of the quad
@@ -67,4 +63,3 @@ export class MyQuad extends CGFobject {
 		this.updateTexCoordsGLBuffers();
 	}
 }
-

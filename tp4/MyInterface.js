@@ -22,7 +22,12 @@ export class MyInterface extends CGFinterface {
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'displayQuad').name('Display Quad');
+
+        // TP4 - Texture Tangram
         this.gui.add(this.scene, 'displayTangram').name('Display Tangram');
+
+        // TP4 - Texture Unit Cube Quad
+        this.gui.add(this.scene, 'displayCube').name('Display Cube');
 
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateAppliedTexture.bind(this.scene));

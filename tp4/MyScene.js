@@ -10,7 +10,6 @@ export class MyScene extends CGFscene {
     constructor() {
         super();
     }
-
     init(application) {
         super.init(application);
         this.initCameras();
@@ -18,7 +17,6 @@ export class MyScene extends CGFscene {
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
@@ -28,7 +26,8 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
-        this.unitcubequad = new MyUnitCubeQuad(this);
+
+        // Tp4 - Texture Tangram
         this.tangram = new MyTangram(this);
 
         //------ Applied Material
@@ -44,14 +43,25 @@ export class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+
+        // TP4 - Texture Unit Cube Quad
         this.textureTop = new CGFtexture(this, 'images/mineTop.png');
         this.textureSide = new CGFtexture(this, 'images/mineSide.png');
         this.textureBottom = new CGFtexture(this, 'images/mineBottom.png');
 
+        // TP4 - Texture Unit Cube Quad
+        this.cube = new MyUnitCubeQuad(this, this.textureTop, this.textureSide, this.textureSide, this.textureSide, this.textureSide, this.textureBottom);
+
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.displayQuad = true;
+
+        // TP4 - Texture Tangram
         this.displayTangram = false
+
+        // TP4 - Texture Unit Cube Quad
+        this.displayCube = false;
+
         this.scaleFactor = 3;
         this.selectedTexture = -1;        
         this.wrapS = 0;
@@ -129,6 +139,11 @@ export class MyScene extends CGFscene {
 
         if (this.displayTangram) {
             this.tangram.display();
+        }
+
+        if (this.displayCube) {
+            this.quadMaterial.apply();
+            this.cube.display();
         }
 
         // ---- END Primitive drawing section
