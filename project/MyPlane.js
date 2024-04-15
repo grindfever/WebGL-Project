@@ -1,7 +1,7 @@
 import { CGFobject } from '../lib/CGF.js';
 /**
 * MyPlane
-* @constructor
+* @constructor 
  * @param scene - Reference to MyScene object
  * @param nDivs - number of divisions in both directions of the surface
  * @param minS - minimum texture coordinate in S

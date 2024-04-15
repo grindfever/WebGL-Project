@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
+import { MyPanorama } from "./MyPanorama.js";
 /**
  * MyScene
  * @constructor
@@ -28,9 +29,12 @@ export class MyScene extends CGFscene {
     // MySphere
     this.sphere = new MySphere(this, 1, 40, 40);
 
+    // MyPanorama
+    this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
+
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayNormals = true;
+    this.displayNormals = false;
     this.scaleFactor = 1;
     this.enableTextures(true);
 
@@ -38,9 +42,13 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.appearance.setShininess(10.0);
 
     // Earth texture
     this.earthTexture = new CGFtexture(this,'images/earth.jpg');
+    this.appearance1 = new CGFappearance(this);
+    this.appearance1.setTexture(this.earthTexture);
+    this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -59,8 +67,8 @@ export class MyScene extends CGFscene {
   }
   setDefaultAppearance() {
     this.setAmbient(0.5, 0.5, 0.8, 1.0);
-    this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-    this.setSpecular(0.2, 0.4, 0.8, 1.0);
+    this.setDiffuse(0.4, 0.4, 0.8, 1.0);
+    this.setSpecular(0.4, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
   display() {
@@ -90,16 +98,18 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-
-    if (this.displayNormals)
+    if (this.displayNormals) {
       this.sphere.enableNormalViz();
-    else
+    } else {
       this.sphere.disableNormalViz();
-    
-    this.earthTexture.bind();
+    }
+    this.appearance1.apply();
     this.sphere.display();
     this.popMatrix();
     
+    this.pushMatrix();
+    this.panorama.display();
+    this.popMatrix();
     // ---- END Primitive drawing section
   }
 }
