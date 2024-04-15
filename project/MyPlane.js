@@ -42,7 +42,6 @@ export class MyPlane extends CGFobject {
 		}
 		// Generating indices
 		this.indices = [];
-
 		var ind = 0;
 		for (var j = 0; j < this.nrDivs; j++) {
 			for (var i = 0; i <= this.nrDivs; i++) {
@@ -61,9 +60,7 @@ export class MyPlane extends CGFobject {
 	setFillMode() { 
 		this.primitiveType=this.scene.gl.TRIANGLE_STRIP;
 	}
-
 	setLineMode() { 
 		this.primitiveType=this.scene.gl.LINES;
 	};
-
 }

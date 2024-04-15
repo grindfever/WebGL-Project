@@ -16,7 +16,6 @@ export class MyScene extends CGFscene {
 
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
     this.gl.clearDepth(100.0);
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
@@ -24,19 +23,24 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this,30);
+    this.plane = new MyPlane(this, 30);
 
-    this.sphere= new MySphere(this,1,40,40,true);
+    // MySphere
+    this.sphere = new MySphere(this, 1, 40, 40);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
+    this.displayNormals = true;
     this.scaleFactor = 1;
     this.enableTextures(true);
 
     this.texture = new CGFtexture(this, "images/terrain.jpg");
-    this.texture1 = new CGFtexture(this,'images/earth.jpg');
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    // Earth texture
+    this.earthTexture = new CGFtexture(this,'images/earth.jpg');
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -54,7 +58,7 @@ export class MyScene extends CGFscene {
     );
   }
   setDefaultAppearance() {
-    this.setAmbient(0.2, 0.4, 0.8, 1.0);
+    this.setAmbient(0.5, 0.5, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
@@ -86,9 +90,16 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.texture1.bind();
+
+    if (this.displayNormals)
+      this.sphere.enableNormalViz();
+    else
+      this.sphere.disableNormalViz();
+    
+    this.earthTexture.bind();
     this.sphere.display();
     this.popMatrix();
+    
     // ---- END Primitive drawing section
   }
 }
