@@ -2,9 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
-import { MyStem } from "./MyStem.js";
-import { MyPetal } from "./MyPetal.js";
-import { MyReceptacle } from "./MyReceptacle.js";
+import { MyFlower } from "./MyFlower.js";
 /**
  * MyScene
  * @constructor
@@ -35,9 +33,8 @@ export class MyScene extends CGFscene {
     // MyPanorama
     this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
 
-    this.cylinder = new MyStem(this, 20, 20);
-    this.triangle = new MyPetal(this);
-    this.receptacle = new MyReceptacle(this);
+    // MyFlower
+    this.flower = new MyFlower(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -55,19 +52,10 @@ export class MyScene extends CGFscene {
     this.appearance1.setTexture(new CGFtexture(this, 'images/earth.jpg'));
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.appearance1.setShininess(10.0);
-
-    this.appearance2 = new CGFappearance(this);
-		this.appearance2.setTexture(new CGFtexture(this, 'images/stem.png'));
-		this.appearance2.setTextureWrap('REPEAT', 'REPEAT');
-    this.appearance2.setShininess(10.0);
-
-    this.appearance3 = new CGFappearance(this);
-    this.appearance3.setTexture(new CGFtexture(this, 'images/receptacle.png'));
-    this.appearance3.setTextureWrap('REPEAT', 'REPEAT');
-    this.appearance3.setShininess(10.0);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
+    this.lights[0].setAmbient(1.0, 1.0, 1.0, 1.0);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
@@ -128,21 +116,8 @@ export class MyScene extends CGFscene {
     this.panorama.display();
     this.popMatrix();
 
-    this.pushMatrix();
-    this.scale(0.2, 1, 0.2);
-    this.appearance2.apply();
-    this.cylinder.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.translate(0, 1, 0);
-    this.scale(0.2, 0.2, 0.2);
-    this.appearance3.apply();
-    this.receptacle.display();
-    this.popMatrix();
-
-    this.triangle.display();
-
+    this.flower.display();
+    
     // ---- END Primitive drawing section
   }
 }
