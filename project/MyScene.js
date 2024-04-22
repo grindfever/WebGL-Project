@@ -2,6 +2,9 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
+import { MyStem } from "./MyStem.js";
+import { MyPetal } from "./MyPetal.js";
+import { MyReceptacle } from "./MyReceptacle.js";
 /**
  * MyScene
  * @constructor
@@ -32,23 +35,36 @@ export class MyScene extends CGFscene {
     // MyPanorama
     this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
 
+    this.cylinder = new MyStem(this, 20, 20);
+    this.triangle = new MyPetal(this);
+    this.receptacle = new MyReceptacle(this);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
     this.enableTextures(true);
 
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
-    this.appearance.setTexture(this.texture);
+    this.appearance.setTexture(new CGFtexture(this, 'images/terrain.jpg'));
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.appearance.setShininess(10.0);
 
     // Earth texture
-    this.earthTexture = new CGFtexture(this,'images/earth.jpg');
     this.appearance1 = new CGFappearance(this);
-    this.appearance1.setTexture(this.earthTexture);
+    this.appearance1.setTexture(new CGFtexture(this, 'images/earth.jpg'));
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
+    this.appearance1.setShininess(10.0);
+
+    this.appearance2 = new CGFappearance(this);
+		this.appearance2.setTexture(new CGFtexture(this, 'images/stem.png'));
+		this.appearance2.setTextureWrap('REPEAT', 'REPEAT');
+    this.appearance2.setShininess(10.0);
+
+    this.appearance3 = new CGFappearance(this);
+    this.appearance3.setTexture(new CGFtexture(this, 'images/receptacle.png'));
+    this.appearance3.setTextureWrap('REPEAT', 'REPEAT');
+    this.appearance3.setShininess(10.0);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -88,6 +104,7 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
 
     // ---- BEGIN Primitive drawing section
+    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
 
     this.pushMatrix();
     this.appearance.apply();
@@ -104,12 +121,28 @@ export class MyScene extends CGFscene {
       this.sphere.disableNormalViz();
     }
     this.appearance1.apply();
-    this.sphere.display();
+    //this.sphere.display();
     this.popMatrix();
     
     this.pushMatrix();
     this.panorama.display();
     this.popMatrix();
+
+    this.pushMatrix();
+    this.scale(0.2, 1, 0.2);
+    this.appearance2.apply();
+    this.cylinder.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.translate(0, 1, 0);
+    this.scale(0.2, 0.2, 0.2);
+    this.appearance3.apply();
+    this.receptacle.display();
+    this.popMatrix();
+
+    this.triangle.display();
+
     // ---- END Primitive drawing section
   }
 }

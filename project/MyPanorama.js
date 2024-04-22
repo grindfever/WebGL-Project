@@ -1,5 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
-import { CGFappearance } from '../lib/CGF.js';
+import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 /**
 * MyPlane
@@ -23,6 +22,7 @@ export class MyPanorama extends CGFobject {
 		this.sphere = new MySphere(scene, 200, 40, 40, true);
 	}
 	display() {
+		this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
 		this.apperance.apply();
 		this.sphere.display();
 	}
