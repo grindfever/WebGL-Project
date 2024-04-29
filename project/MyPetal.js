@@ -5,23 +5,23 @@ import { CGFobject } from '../../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MyPetal extends CGFobject {
-    constructor(scene, radius) {
+    constructor(scene, rotationAngle) {
         super(scene);
-        this.radius = radius;
+        this.angle = rotationAngle;
         this.initBuffers();
     }
     initBuffers() {
         this.vertices = [
-            0, 0, 0,	                        //0
-            -this.radius / 2, this.radius, 0,   //1
-            this.radius / 2, this.radius, 0,    //2
-            0, this.radius * 2, 0,	            //3
-            0, 0, 0,	                        //4
-            -this.radius / 2, this.radius, 0,	//5
-            this.radius / 2, this.radius, 0,    //6
-            0, this.radius * 2, 0               //7
+            0, 0, 0,	    //0
+            -0.5, 1, 0,	    //1
+            0.5, 1, 0,	    //2
+            0, 2, 0,	    //3
+            0, 0, 0,	    //4
+            -0.5, 1, 0,	    //5
+            0.5, 1, 0,      //6
+            0, 2, 0         //7
         ];
-        
+
         //Counter-clockwise reference of vertices
         this.indices = [
             0, 2, 1,
@@ -31,14 +31,14 @@ export class MyPetal extends CGFobject {
         ];
         
         this.normals = [
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 0,
-            0, -1, 0,
-            0, -1, 0,
-            0, -1, 0,
-            0, -1, 0
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1
         ];
 
         this.texCoords = [

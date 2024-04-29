@@ -15,9 +15,13 @@ export class MyReceptacle extends CGFobject {
         this.sphere = new MySphere(scene, this.radius, 40, 40);
     }
     display() {
-        this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
         this.sphere.display();
-        this.scene.popMatrix();
+    }
+    enableNormalViz() {
+        this.sphere.enableNormalViz();
+    }
+    disableNormalViz() {
+        this.sphere.disableNormalViz();
     }
 }

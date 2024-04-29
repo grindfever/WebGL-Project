@@ -20,7 +20,6 @@ export class MySphere extends CGFobject {
         this.north = north;
         this.south = south;
         this.initBuffers();
-
     }
     initBuffers() {
         this.vertices = [];
@@ -28,6 +27,7 @@ export class MySphere extends CGFobject {
         this.normals = [];
         this.texCoords = [];
         let angle;
+
         for (let h = 0; h <= this.stacks * 2; h += 1) {
             angle = - Math.PI / 2 + Math.PI * h / (2 * this.stacks);
             this.vertices.push(this.radius * Math.cos(angle), this.radius * Math.sin(angle), 0);

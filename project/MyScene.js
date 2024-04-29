@@ -34,7 +34,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
 
     // MyFlower
-    this.flower = new MyFlower(this, 5, 1, 1, 2, 1, 1, 1, 5);
+    this.flower = new MyFlower(this, Math.trunc(10 * Math.random()), 1, 1.5 - Math.random(), 2, 1, 1, 1, Math.round(5 * Math.random()), Math.random());
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -118,6 +118,11 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     //this.translate(0, -10, 0);
+    if (this.displayNormals) {
+      this.flower.enableNormalViz();
+    } else {
+      this.flower.disableNormalViz();
+    }
     this.flower.display();
     this.popMatrix();
     

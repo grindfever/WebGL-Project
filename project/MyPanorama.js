@@ -11,19 +11,18 @@ export class MyPanorama extends CGFobject {
 		super(scene);
 		this.texture = texture;
 		this.init(scene);
-		
 	}
 	init(scene) {
-		this.apperance = new CGFappearance(scene);
-		this.apperance.setEmission(1, 1, 1, 1);
-		this.apperance.setShininess(10.0);
-		this.apperance.setTexture(this.texture);
-		this.apperance.setTextureWrap('REPEAT', 'REPEAT');
+		this.appearance = new CGFappearance(scene);
+		this.appearance.setEmission(1, 1, 1, 1);
+		this.appearance.setShininess(10.0);
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 		this.sphere = new MySphere(scene, 200, 40, 40, true);
 	}
 	display() {
 		this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
-		this.apperance.apply();
+		this.appearance.apply();
 		this.sphere.display();
 	}
 }
