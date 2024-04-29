@@ -46,13 +46,15 @@ export class MySphere extends CGFobject {
                 x = Math.cos(angleXZ) * Math.cos(angleXY);
                 z = Math.sin(angleXZ) * Math.cos(angleXY);
                 y = Math.sin(angleXY);
+
                 this.vertices.push(this.radius * x, this.radius * y * y_factor, this.radius * z);
                 this.normals.push(this.inside * x, this.inside * y, this.inside * z);
                 this.texCoords.push(i / this.slices, 1 - j / (this.stacks * 2));
+
                 points = this.vertices.length / 3;
                 index3 = points - 2;
                 index4 = points - 1;
-                index2 = index4 - (this.stacks*2 + 1);
+                index2 = index4 - (this.stacks * 2 + 1);
                 index1 = index2 - 1;
                 if (this.inside == -1) {
                     this.indices.push(index1, index3, index4, index1, index4, index2);

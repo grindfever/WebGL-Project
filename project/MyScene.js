@@ -34,7 +34,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
 
     // MyFlower
-    this.flower = new MyFlower(this, Math.trunc(10 * Math.random()), 1, 1.5 - Math.random(), 2, 1, 1, 1, Math.round(5 * Math.random()), Math.random());
+    this.flower = new MyFlower(this, 2, 1);
 
     //Objects connected to MyInterface
     this.displayAxis = true;

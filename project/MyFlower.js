@@ -6,51 +6,45 @@ import { MyReceptacle } from './MyReceptacle.js';
  * MyFlower
  * @constructor
  * @param scene - Reference to MyScene object
- * @param petalCount - Number of petals
- * @param outerRadius - Outer radius of the petals
- * @param heartRadius - Radius of the heart
  * @param stemRadius - Radius of the stem
  * @param stemCount - Number of divisions of the stem
- * @param stemTexture - Texture of the stem
- * @param receptacleTexture - Texture of the receptacle
- * @param petalTexture - Texture of the petals
- * @param rotationAngle - Angle of rotation of the petals
  */
 export class MyFlower extends CGFobject {
-    constructor(scene, petalCount, outerRadius, heartRadius, stemRadius, stemCount, stemTexture, receptacleTexture, petalTexture, rotationAngle) {
+    constructor(scene, stemRadius, stemCount) {
         super(scene);
+        let petalCount = Math.trunc(10 * Math.random());
         this.petalCount = petalCount < 3 ? 3 : petalCount > 10 ? 10 : petalCount;
-        this.outerRadius = outerRadius;
-        this.heartRadius = heartRadius;
+        this.outerRadius = Math.random() * 10;
+        this.heartRadius = Math.random();
         this.stemRadius = stemRadius;
         this.stemCount = stemCount;
-        this.stemTexture = stemTexture;
-        this.receptacleTexture = receptacleTexture;
-        this.petalTexture = petalTexture < 1 ? 1 : petalTexture > 5 ? 5 : petalTexture;
-        this.rotationAngle = rotationAngle;
+        this.rotationAngle = Math.random();
 
-        this.random = Math.random();
+        let petalTexture = Math.round(5 * Math.random());
+        this.petalTexture = petalTexture < 1 ? 1 : petalTexture > 5 ? 5 : petalTexture;
+        
+        let random = Math.random();
         if (this.petalCount == 3) {
-            this.petalThin = this.random < 0.3 ? 0.3 : this.random;
+            this.petalThin = random < 0.3 ? 0.3 : random;
         } else if (this.petalCount == 4) {
-            this.petalThin = this.random < 0.6 ? 0.6 : this.random;
+            this.petalThin = random < 0.6 ? 0.6 : random;
         } else if (this.petalCount == 5) {
-            this.petalThin = this.random < 0.7 ? 0.7 : this.random;
+            this.petalThin = random < 0.7 ? 0.7 : random;
         } else if (this.petalCount == 6) {
-            this.petalThin = 2 * this.random < 0.8 ? 0.8 : 2 * this.random;
+            this.petalThin = 2 * random < 0.8 ? 0.8 : 2 * random;
         } else if (this.petalCount == 7) {
-            this.petalThin = 2 * this.random < 1 ? 1 : 2 * this.random;
+            this.petalThin = 2 * random < 1 ? 1 : 2 * random;
         } else if (this.petalCount == 8) {
-            this.petalThin = 2 * this.random < 1.2 ? 1.2 : 2 * this.random;
+            this.petalThin = 2 * random < 1.2 ? 1.2 : 2 * random;
         } else if (this.petalCount == 9) {
-            this.petalThin = 2 * this.random < 1.5 ? 1.5 : 2 * this.random;
+            this.petalThin = 2 * random < 1.5 ? 1.5 : 2 * random;
         } else if (this.petalCount == 10) {
-            this.petalThin = 2 * this.random < 1.6 ? 1.6 : 2 * this.random;
+            this.petalThin = 2 * random < 1.6 ? 1.6 : 2 * random;
         }
         this.init(scene);
     }
     init(scene) {
-        this.stem = new MyStem(scene, 20, 20);
+        this.stem = new MyStem(scene, 20, 20, this.stemRadius);
         this.petal = new MyPetal(this.scene, this.rotationAngle);
         this.receptacle = new MyReceptacle(scene, this.heartRadius);
 
@@ -75,7 +69,7 @@ export class MyFlower extends CGFobject {
         this.scene.scale(this.flowerRadius, this.flowerRadius, this.flowerRadius);
         
         this.scene.pushMatrix();
-        this.scene.scale(0.05, 1, 0.05);
+        this.scene.scale(0.1, 1, 0.1);
         this.stemAppearance.apply();
         this.stem.display();
         this.scene.popMatrix();
@@ -115,5 +109,8 @@ export class MyFlower extends CGFobject {
         this.stem.disableNormalViz();
         this.petal.disableNormalViz();
         this.receptacle.disableNormalViz();
+    }
+    updatePetalAngle(angle) {
+        this.petal.updateAngle(angle);
     }
 }
