@@ -5,26 +5,30 @@ import { CGFobject } from '../../lib/CGF.js';
  * @param scene - Reference to MyScene object
  * @param slices - Number of slices
  * @param stacks - Number of stacks
+ * @param radius - Radius of the stem
  */
 export class MyStem extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, radius, count) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.radius = radius;
+        this.count = count;
         this.initBuffers();
     }
+
     initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
         
-        for (let y = 0 ; y <= this.stacks ; y += 1) {
-            this.vertices.push(1, y / this.stacks, 0);
+        for (let y = 0 ; y <= this.stacks * this.count; y += 1) {
+            this.vertices.push(this.radius, y / (this.stacks * this.height), 0);
             this.normals.push(1, 0, 0);
         }
         for (let i = 1 ; i <= this.slices ; i++) {
-            let angle = 2 * Math.PI * i / this.slices;
+            let angle = this.radius * 2 * Math.PI * i / this.slices;
             let x = Math.cos(angle);
             let z = Math.sin(angle);
             let vector_size = Math.sqrt(x * x + z * z);
@@ -34,7 +38,7 @@ export class MyStem extends CGFobject {
             }
             for (let j = 1 ; j <= this.stacks ; j++) {
                 if (i != this.slices) {
-                    let y = j / this.stacks;
+                    let y = this.height * j / this.stacks;
                     this.vertices.push(x, y, z);
                     this.normals.push(x / vector_size, 0, z / vector_size);
                     
