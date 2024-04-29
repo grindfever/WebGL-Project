@@ -11,14 +11,14 @@ export class MyPetal extends CGFobject {
     }
     initBuffers() {
         this.vertices = [
-            0, -0.5, 0,	    //0
-            -0.5, 0.5, 0,	//1
-            0.5, 0.5, 0,	//2
-            0, 1.5, 0,	    //3
+            0, 0, 0,	    //0
+            -0.5, 1, 0,	    //1
+            0.5, 1, 0,	    //2
+            0, 2, 0,	    //3
             0, 0, 0,	    //4
-            -0.5, 0.5, 0,	//5
-            0.5, 0.5, 0,    //6
-            0, 2, 0,	    //7
+            -0.5, 1, 0,	    //5
+            0.5, 1, 0,      //6
+            0, 2, 0         //7
         ];
         
         //Counter-clockwise reference of vertices
@@ -37,7 +37,18 @@ export class MyPetal extends CGFobject {
             0, -1, 0,
             0, -1, 0,
             0, -1, 0,
-            0, -1, 0,
+            0, -1, 0
+        ];
+
+        this.texCoords = [
+            0, 0,
+            0, 1,
+            1, 0,
+            1, 1,
+            0, 0,
+            0, 1,
+            1, 0,
+            1, 1
         ];
 
         //The defined indices (and corresponding vertices)

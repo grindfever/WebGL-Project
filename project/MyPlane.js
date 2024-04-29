@@ -58,9 +58,9 @@ export class MyPlane extends CGFobject {
 		this.initGLBuffers();
 	}
 	setFillMode() { 
-		this.primitiveType=this.scene.gl.TRIANGLE_STRIP;
+		this.primitiveType = this.scene.gl.TRIANGLE_STRIP;
 	}
 	setLineMode() { 
-		this.primitiveType=this.scene.gl.LINES;
+		this.primitiveType = this.scene.gl.LINES;
 	};
 }

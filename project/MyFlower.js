@@ -27,6 +27,12 @@ export class MyFlower extends CGFobject {
         this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
         this.receptacleAppearance.setShininess(10.0);
         this.receptacleAppearance.setAmbient(0.5, 0.5, 0.5, 1);
+
+        this.petalAppearance = new CGFappearance(scene);
+        this.petalAppearance.setTexture(new CGFtexture(scene, 'images/petal.png'));
+        this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+        this.petalAppearance.setShininess(10.0);
+        this.petalAppearance.setAmbient(0.5, 0.5, 0.5, 1);
     }
     display() {
         this.scene.pushMatrix();
@@ -42,6 +48,52 @@ export class MyFlower extends CGFobject {
         this.receptacle.display();
         this.scene.popMatrix();
 
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.translate(0, 0, -1);
+        this.scene.scale(0.6, 0.6, 0.6);
+        this.petalAppearance.apply();
         this.petal.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.rotate(Math.PI / 3, 0, 0, 1);
+        this.scene.translate(0, 0, -1);
+        this.scene.scale(0.6, 0.6, 0.6);
+        this.petal.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.rotate(2 * Math.PI / 3, 0, 0, 1);
+        this.scene.translate(0, 0, -1);
+        this.scene.scale(0.6, 0.6, 0.6);
+        this.petal.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.rotate(Math.PI, 0, 0, 1);
+        this.scene.translate(0, 0, -1);
+        this.scene.scale(0.6, 0.6, 0.6);
+        this.petal.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.rotate(4 * Math.PI / 3, 0, 0, 1);
+        this.scene.translate(0, 0, -1);
+        this.scene.scale(0.6, 0.6, 0.6);
+        this.petal.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.rotate(5 * Math.PI / 3, 0, 0, 1);
+        this.scene.translate(0, 0, -1);
+        this.scene.scale(0.6, 0.6, 0.6);
+        this.petal.display();
+        this.scene.popMatrix();
     }
 }
