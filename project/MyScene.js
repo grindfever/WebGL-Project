@@ -28,7 +28,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
 
     // MySphere
-    this.sphere = new MySphere(this, 1, 40, 40);
+    this.sphere = new MySphere(this, 1, 32, 16);
 
     // MyPanorama
     this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
@@ -40,6 +40,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
+    this.fov = 1;
     this.enableTextures(true);
 
     this.appearance = new CGFappearance(this);
@@ -98,16 +99,12 @@ export class MyScene extends CGFscene {
     this.appearance.apply();
     this.translate(0, -100, 0);
     this.scale(400, 400, 400);
-    this.rotate(-Math.PI/2.0, 1, 0,0);
+    this.rotate(-Math.PI / 2.0, 1,0, 0);
     this.plane.display();   
     this.popMatrix();
 
     this.pushMatrix();
-    if (this.displayNormals) {
-      this.sphere.enableNormalViz();
-    } else {
-      this.sphere.disableNormalViz();
-    }
+    this.displayNormals ? this.sphere.enableNormalViz() : this.sphere.disableNormalViz();
     this.appearance1.apply();
     //this.sphere.display();
     this.popMatrix();
@@ -118,13 +115,12 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     //this.translate(0, -10, 0);
-    if (this.displayNormals) {
-      this.flower.enableNormalViz();
-    } else {
-      this.flower.disableNormalViz();
-    }
+    this.displayNormals ? this.flower.enableNormalViz() : this.flower.disableNormalViz();
     this.flower.display();
     this.popMatrix();
+
+    // Update the camera's field of view
+    this.camera.fov = this.fov;
     
     // ---- END Primitive drawing section
   }

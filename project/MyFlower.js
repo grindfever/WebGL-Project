@@ -14,32 +14,36 @@ export class MyFlower extends CGFobject {
         super(scene);
         let petalCount = Math.trunc(10 * Math.random());
         this.petalCount = petalCount < 3 ? 3 : petalCount > 10 ? 10 : petalCount;
-        this.outerRadius = Math.random() * 10;
-        this.heartRadius = Math.random();
+
+        let random = Math.random();
+        this.outerRadius = random * 3 < 1 ? 1 : random * 3;
+        this.heartRadius = random * 2 < 1 ? 1 : random * 2 > 1.5 ? 1.5 : random * 2;
         this.stemRadius = stemRadius;
         this.stemCount = stemCount;
-        this.rotationAngle = Math.random();
+
+        let random1 = Math.random();
+        this.rotationAngle = random1 < 0.5 ? 0.5 : random1;
 
         let petalTexture = Math.round(5 * Math.random());
         this.petalTexture = petalTexture < 1 ? 1 : petalTexture > 5 ? 5 : petalTexture;
         
-        let random = Math.random();
+        let random2 = Math.random();
         if (this.petalCount == 3) {
-            this.petalThin = random < 0.3 ? 0.3 : random;
+            this.petalThin = random2 < 0.3 ? 0.3 : random2;
         } else if (this.petalCount == 4) {
-            this.petalThin = random < 0.6 ? 0.6 : random;
+            this.petalThin = random2 < 0.6 ? 0.6 : random2;
         } else if (this.petalCount == 5) {
-            this.petalThin = random < 0.7 ? 0.7 : random;
+            this.petalThin = random2 < 0.7 ? 0.7 : random2;
         } else if (this.petalCount == 6) {
-            this.petalThin = 2 * random < 0.8 ? 0.8 : 2 * random;
+            this.petalThin = 2 * random2 < 0.8 ? 0.8 : 2 * random2;
         } else if (this.petalCount == 7) {
-            this.petalThin = 2 * random < 1 ? 1 : 2 * random;
+            this.petalThin = 2 * random2 < 1 ? 1 : 2 * random2;
         } else if (this.petalCount == 8) {
-            this.petalThin = 2 * random < 1.2 ? 1.2 : 2 * random;
+            this.petalThin = 2 * random2 < 1.2 ? 1.2 : 2 * random2;
         } else if (this.petalCount == 9) {
-            this.petalThin = 2 * random < 1.5 ? 1.5 : 2 * random;
+            this.petalThin = 2 * random2 < 1.5 ? 1.5 : 2 * random2;
         } else if (this.petalCount == 10) {
-            this.petalThin = 2 * random < 1.6 ? 1.6 : 2 * random;
+            this.petalThin = 2 * random2 < 1.6 ? 1.6 : 2 * random2;
         }
         this.init(scene);
     }
@@ -65,9 +69,6 @@ export class MyFlower extends CGFobject {
         this.petalAppearance.setShininess(10.0);
     }
     display() {
-        this.flowerRadius = this.outerRadius * this.heartRadius * this.stemRadius;
-        this.scene.scale(this.flowerRadius, this.flowerRadius, this.flowerRadius);
-        
         this.scene.pushMatrix();
         this.scene.scale(0.1, 1, 0.1);
         this.stemAppearance.apply();
@@ -76,15 +77,6 @@ export class MyFlower extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(0, 1, 0);
-        if (this.heartRadius < 0.7) {
-            this.scene.scale(this.heartRadius, this.heartRadius, this.heartRadius);
-        } else if (this.heartRadius < 1) {
-            this.scene.scale(this.heartRadius * 0.7, 0.7, this.heartRadius * 0.7);
-        } else if (this.heartRadius < 1.3){
-            this.scene.scale(this.heartRadius * 0.5, 0.5, this.heartRadius * 0.5);
-        } else {
-            this.scene.scale(this.heartRadius * 0.3, 0.3, this.heartRadius * 0.3);
-        }
         this.receptacleAppearance.apply();
         this.receptacle.display();
         this.scene.popMatrix();
@@ -94,7 +86,7 @@ export class MyFlower extends CGFobject {
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
             this.scene.rotate(i * 2 * Math.PI / this.petalCount, 0, 0, 1);
             this.scene.translate(0, 0, -1);
-            this.scene.scale(1, this.petalThin, 1);
+            this.scene.scale(this.outerRadius, this.outerRadius * this.petalThin, this.outerRadius);
             this.petalAppearance.apply();
             this.petal.display();
             this.scene.popMatrix();
