@@ -16,7 +16,7 @@ export class MyFlower extends CGFobject {
         this.petalCount = petalCount < 3 ? 3 : petalCount > 10 ? 10 : petalCount;
 
         let random = Math.random();
-        this.outerRadius = random * 3 < 1 ? 1 : random * 3;
+        this.outerRadius = random * 2 < 1 ? 1 : random * 2;
         this.heartRadius = random * 2 < 1 ? 1 : random * 2 > 1.5 ? 1.5 : random * 2;
         this.stemRadius = stemRadius;
         this.stemCount = stemCount;
@@ -26,6 +26,7 @@ export class MyFlower extends CGFobject {
 
         let petalTexture = Math.round(5 * Math.random());
         this.petalTexture = petalTexture < 1 ? 1 : petalTexture > 5 ? 5 : petalTexture;
+        this.petalColor = [Math.random(), Math.random(), Math.random()];
         
         let random2 = Math.random();
         if (this.petalCount == 3) {
@@ -48,7 +49,7 @@ export class MyFlower extends CGFobject {
         this.init(scene);
     }
     init(scene) {
-        this.stem = new MyStem(scene, 20, 20, this.stemRadius);
+        this.stem = new MyStem(scene, 20, 30, this.stemRadius);
         this.petal = new MyPetal(this.scene, this.rotationAngle);
         this.receptacle = new MyReceptacle(scene, this.heartRadius);
 
@@ -64,6 +65,7 @@ export class MyFlower extends CGFobject {
         this.receptacleAppearance.setAmbient(0.7, 0.7, 0.7, 1);
 
         this.petalAppearance = new CGFappearance(scene);
+        this.petalAppearance.setColor(this.petalColor[0], this.petalColor[1], this.petalColor[2], 1);
         this.petalAppearance.setTexture(new CGFtexture(scene, 'images/petal' + this.petalTexture + '.png'));
         this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
         this.petalAppearance.setShininess(10.0);
@@ -84,8 +86,8 @@ export class MyFlower extends CGFobject {
         for (let i = 1; i <= this.petalCount; i++) {
             this.scene.pushMatrix();
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
+            this.scene.translate(0, 0, -1);            
             this.scene.rotate(i * 2 * Math.PI / this.petalCount, 0, 0, 1);
-            this.scene.translate(0, 0, -1);
             this.scene.scale(this.outerRadius, this.outerRadius * this.petalThin, this.outerRadius);
             this.petalAppearance.apply();
             this.petal.display();

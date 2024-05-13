@@ -2,7 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
-import { MyFlower } from "./MyFlower.js";
+import { MyGarden } from "./MyGarden.js";
 /**
  * MyScene
  * @constructor
@@ -33,8 +33,8 @@ export class MyScene extends CGFscene {
     // MyPanorama
     this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
 
-    // MyFlower
-    this.flower = new MyFlower(this, 2, 1);
+    // MyGarden
+    this.garden = new MyGarden(this, 1, 1);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -114,9 +114,8 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    //this.translate(0, -10, 0);
-    this.displayNormals ? this.flower.enableNormalViz() : this.flower.disableNormalViz();
-    this.flower.display();
+    this.displayNormals ? this.garden.enableNormalViz() : this.garden.disableNormalViz();
+    this.garden.display();
     this.popMatrix();
 
     // Update the camera's field of view

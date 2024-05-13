@@ -17,12 +17,12 @@ export class MyPetal extends CGFobject {
             -0.5, 1, 0,	                                                                                //1
             0.5, 1, 0,	                                                                                //2
             0, 2 * Math.abs(Math.cos(2 * Math.PI * this.angle)), Math.sin(2 * Math.PI * this.angle),	//3
-            0, 0, 0,	                                                                                //4
+            0, 0, 0.2,	                                                                                //4
             -0.5, 1, 0,	                                                                                //5
             0.5, 1, 0,                                                                                  //6
             0, 2 * Math.abs(Math.cos(2 * Math.PI * this.angle)), Math.sin(2 * Math.PI * this.angle)     //7
         ];
-        console.log(this.vertices);
+
         //Counter-clockwise reference of vertices
         this.indices = [
             0, 1, 2,
