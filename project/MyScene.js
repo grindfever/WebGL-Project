@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRockSet } from "./MyRockSet.js";
+import { MyRock } from "./MyRock.js";
 
 export class MyScene extends CGFscene {
     constructor() {
@@ -29,11 +30,13 @@ export class MyScene extends CGFscene {
         this.panorama = new MyPanorama(this, new CGFtexture(this, 'images/panorama4.jpg'));
         this.garden = new MyGarden(this, 1, 1);
         this.rockSet = new MyRockSet(this, 500);
+        this.rock = new MyRock(this, 1,32,16);
 
         // Objects connected to MyInterface
         this.displayAxis = true;
         this.displayNormals = false;
         this.displayGarden = true;
+        this.displayRock=true;
         this.displayRockSet = true;
         this.scaleFactor = 1;
         this.fov = 1;
@@ -48,6 +51,14 @@ export class MyScene extends CGFscene {
         this.appearance1.setTexture(new CGFtexture(this, 'images/earth.jpg'));
         this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
         this.appearance1.setShininess(10.0);
+
+        // Rock appearance
+      	this.rockAppearance = new CGFappearance(this);
+        this.rockAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.rockAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.rockAppearance.setSpecular(0.2, 0.2, 0.2, 1);
+        this.rockAppearance.setShininess(10.0);
+
     }
 
     initLights() {
@@ -112,6 +123,11 @@ export class MyScene extends CGFscene {
         this.pushMatrix();
         if (this.displayRockSet) this.rockSet.display();
         this.popMatrix();
+    
+          this.pushMatrix();
+          this.rockAppearance.apply();
+          if(this.displayRock)this.rock.display();
+          this.popMatrix();
 
         // Update the camera's field of view
         this.camera.fov = this.fov;
