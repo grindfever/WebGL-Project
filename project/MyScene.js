@@ -3,6 +3,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyGarden } from "./MyGarden.js";
+import { MyRock } from "./MyRock.js";
 /**
  * MyScene
  * @constructor
@@ -36,9 +37,14 @@ export class MyScene extends CGFscene {
     // MyGarden
     this.garden = new MyGarden(this, 1, 1);
 
+    // MyRock
+    this.rock = new MyRock(this, 1,32,16);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
+    this.displayGarden=true;
+    this.displayRock=true;
     this.scaleFactor = 1;
     this.fov = 1;
     this.enableTextures(true);
@@ -53,6 +59,13 @@ export class MyScene extends CGFscene {
     this.appearance1.setTexture(new CGFtexture(this, 'images/earth.jpg'));
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.appearance1.setShininess(10.0);
+
+    // Rock appearance
+    this.rockAppearance = new CGFappearance(this);
+    this.rockAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+    this.rockAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
+    this.rockAppearance.setSpecular(0.2, 0.2, 0.2, 1);
+    this.rockAppearance.setShininess(10.0);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -115,7 +128,12 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.displayNormals ? this.garden.enableNormalViz() : this.garden.disableNormalViz();
-    this.garden.display();
+    if(this.displayGarden)this.garden.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.rockAppearance.apply();
+    if(this.displayRock)this.rock.display();
     this.popMatrix();
 
     // Update the camera's field of view
