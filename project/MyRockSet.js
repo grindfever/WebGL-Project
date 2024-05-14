@@ -27,16 +27,26 @@ export class MyRockSet extends CGFobject {
     }
 
     initRocks() {
-        const layers =12; // Calculate number of layers based on total rocks
-        let rockCount = 0; // Counter to keep track of rocks placed
+        let remainingRocks = this.numRocks;
+        let currentLayer = 0;
+        let totalRocksUsed = 0;
     
-        for (let layer = 0; layer < layers; layer++) {
-            const layerSize = layers - layer; // Number of rocks per side in this layer
+        // Calculate the maximum number of complete layers we can build
+        while (true) {
+            const rocksInNextLayer = (currentLayer + 1) ** 2;
+            if (totalRocksUsed + rocksInNextLayer > this.numRocks) break;
+            totalRocksUsed += rocksInNextLayer;
+            currentLayer++;
+        }
+    
+        // Place rocks for each layer
+        for (let layer = 0; layer < currentLayer; layer++) {
+            const layerSize = currentLayer - layer; // Decrease the layer size for each level up
             const layerHeight = layer * 0.5; // Vertical position of the current layer
     
             for (let i = 0; i < layerSize; i++) {
                 for (let j = 0; j < layerSize; j++) {
-                    if (rockCount >= this.numRocks) return; // Stop if we've placed all rocks
+                    if (remainingRocks <= 0) return; // Stop if we've placed all rocks
     
                     let radius = Math.random() * 0.5 + 0.2; // Random radius between 0.2 and 0.7
                     let slices = 16; // Fixed number of slices
@@ -54,11 +64,12 @@ export class MyRockSet extends CGFobject {
                     let rotation = Math.random() * Math.PI * 2; // Random rotation angle between 0 and 2π
     
                     this.rocks.push({ rock, posX, posY, posZ, scaleX, scaleY, scaleZ, rotation });
-                    rockCount++;
+                    remainingRocks--;
                 }
             }
         }
     }
+    
     
     
     
