@@ -19,3 +19,11 @@
 ### Flower Garden
 
 ![Screenshot 4](screenshots/project-t08g04-4.png)
+
+### Rocks
+
+![Screenshot 5](screenshots/project-t08g04-5.png)
+
+### Rock Pile
+
+![Screenshot 6](screenshots/project-t08g04-6.png)

@@ -20,8 +20,6 @@ export class MyStem extends CGFobject {
     init(scene) {
         this.cylinder = new MyCylinder(scene, 16, 32, this.stemRadius);
         this.leaf = new MyPetal(scene, 0);
-        console.log(this.stemHeight);
-        console.log(this.stemCount);
     }
     display() {
         let totalHeight = this.stemHeight[0];

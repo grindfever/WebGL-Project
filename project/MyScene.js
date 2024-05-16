@@ -3,6 +3,8 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyGarden } from "./MyGarden.js";
+import { MyRockSet } from "./MyRockSet.js";
+import { MyRock } from "./MyRock.js";
 /**
  * MyScene
  * @constructor
@@ -36,9 +38,14 @@ export class MyScene extends CGFscene {
     // MyGarden
     this.garden = new MyGarden(this, 3, 3);
 
+    // MyRockSet
+    this.rockSet = new MyRockSet(this, 30);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
+    this.displayGarden = true;
+    this.displayRockSet = true;
     this.scaleFactor = 1;
     this.fov = 1;
     this.enableTextures(true);
@@ -99,7 +106,7 @@ export class MyScene extends CGFscene {
     this.appearance.apply();
     this.translate(0, -100, 0);
     this.scale(400, 400, 400);
-    this.rotate(-Math.PI / 2.0, 1,0, 0);
+    this.rotate(-Math.PI / 2.0, 1, 0, 0);
     this.plane.display();   
     this.popMatrix();
 
@@ -116,7 +123,12 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.displayNormals ? this.garden.enableNormalViz() : this.garden.disableNormalViz();
-    this.garden.display();
+    this.displayGarden ? this.garden.display() : null;
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.displayNormals ? this.rockSet.enableNormalViz() : this.rockSet.disableNormalViz();
+    this.displayRockSet ? this.rockSet.display() : null;
     this.popMatrix();
 
     // Update the camera's field of view
