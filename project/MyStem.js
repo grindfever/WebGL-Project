@@ -1,71 +1,61 @@
 import { CGFobject } from '../../lib/CGF.js';
+import { MyCylinder } from './MyCylinder.js';
+import { MyPetal } from './MyPetal.js';
 /**
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
- * @param radius - Radius of the stem
+ * @param stemRadius - Radius of the stem
+ * @param stemCount - Number of divisions of the stem
+ * @param stemHeight - Array with the height of each division of the stem
  */
 export class MyStem extends CGFobject {
-    constructor(scene, slices, stacks, radius) {
+    constructor(scene, stemRadius, stemCount, stemHeight) {
         super(scene);
-        this.slices = slices;
-        this.stacks = stacks;
-        this.radius = radius;
-        this.initBuffers();
+        this.stemRadius = stemRadius;
+        this.stemCount = stemCount;
+        this.stemHeight = stemHeight;
+        this.init(scene);
     }
-    initBuffers() {
-        this.vertices = [];
-        this.indices = [];
-        this.normals = [];
-        this.texCoords = [];
-        
-        for (let y = 0 ; y <= this.stacks ; y += 1) {
-            this.vertices.push(1, y / this.stacks, 0);
-            this.normals.push(1, 0, 0);
-        }
-        for (let i = 1 ; i <= this.slices ; i++) {
-            let angle = 2 * Math.PI * i / this.slices;
-            let x = Math.cos(angle);
-            let z = Math.sin(angle);
-            let vector_size = Math.sqrt(x * x + z * z);
-            if (i != this.slices) {    
-                this.vertices.push(x, 0, z);
-                this.normals.push(x / vector_size, 0, z / vector_size);
-            }
-            for (let j = 1 ; j <= this.stacks ; j++) {
-                if (i != this.slices) {
-                    let y = j / this.stacks;
-                    this.vertices.push(x, y, z);
-                    this.normals.push(x / vector_size, 0, z / vector_size);
-                    
-                    let points = this.vertices.length / 3;
-                    let indexC = points - 1;
-                    let indexB = indexC - (this.stacks + 1);
-                    let indexA = indexB - 1;
-                    this.indices.push(indexA, points - 2, indexC, indexA, indexC, indexB);
-                    this.indices.push(indexA, indexC, points - 2, indexA, indexB, indexC);
+    init(scene) {
+        this.cylinder = new MyCylinder(scene, 16, 32, this.stemRadius);
+        this.leaf = new MyPetal(scene, 0);
+        console.log(this.stemHeight);
+        console.log(this.stemCount);
+    }
+    display() {
+        let totalHeight = this.stemHeight[0];
 
-                    let s = i / this.slices;
-                    let t = j / this.stacks;
-                    this.texCoords.push(s, t);
-                } else {
-                    let points = this.vertices.length / 3;
-                
-                    let indexB = points - this.stacks - 1 + j;
-                    let indexA = indexB - 1;
-                    this.indices.push(indexA, j - 1, j, indexA, j, indexB);
-                    this.indices.push(indexA, j, j - 1, indexA, indexB, j);
-                    
-                    let s = i / this.slices;
-                    let t = j / this.stacks;
-                    this.texCoords.push(s, t);
+        this.scene.pushMatrix();
+        this.scene.scale(1, this.stemHeight[0], 1);
+        this.cylinder.display();
+        this.scene.popMatrix();
+
+        for (let i = 1; i <= this.stemCount; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, totalHeight, 0);
+            this.scene.scale(1, this.stemHeight[i], 1);
+            this.cylinder.display();
+            this.scene.popMatrix();
+            
+            if (i != this.stemCount) {
+                for (let j = 1; j <= 3; j++) {
+                    this.scene.pushMatrix();
+                    this.scene.rotate(Math.PI / 2, 1, 0, 0);
+                    this.scene.translate(0, 0, -0.2 - totalHeight);           
+                    this.scene.rotate(j * 2 * Math.PI / 3, 0, 0, 1);
+                    this.scene.scale(4, 2, 2);
+                    this.leaf.display();
+                    this.scene.popMatrix();
                 }
             }
+            totalHeight += this.stemHeight[i];
         }
-
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
+    }
+    enableNormalViz() {
+        this.cylinder.enableNormalViz();
+    }
+    disableNormalViz() {
+        this.cylinder.disableNormalViz();
     }
 }

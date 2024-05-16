@@ -25,12 +25,13 @@ export class MyGarden extends CGFobject {
         }
     }
     display() {
-        let totalWidth = (this.numRows - 1) * 10;
-        let totalDepth = (this.numCols - 1) * 10;
+        let totalWidth = (this.numRows - 1) * 20;
+        let totalDepth = (this.numCols - 1) * 20;
         for (let i = 0; i < this.numRows; i++) {
             for (let j = 0; j < this.numCols; j++) {
                 this.scene.pushMatrix();
-                this.scene.translate(i * 10 - totalWidth / 2, 0, j * 10 - totalDepth / 2);
+                this.scene.translate(i * 20 - totalWidth / 2, 0, j * 20 - totalDepth / 2);
+                this.scene.scale(0.5, 0.5, 0.5);
                 this.flowers[i][j].display();
                 this.scene.popMatrix();
             }
