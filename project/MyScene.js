@@ -4,7 +4,6 @@ import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRockSet } from "./MyRockSet.js";
-import { MyRock } from "./MyRock.js";
 /**
  * MyScene
  * @constructor
