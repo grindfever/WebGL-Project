@@ -106,7 +106,8 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.displayNormals ? this.sphere.enableNormalViz() : this.sphere.disableNormalViz();
     this.appearance1.apply();
-    //this.sphere.display();
+    this.translate(0, 20, 0);
+    this.sphere.display();
     this.popMatrix();
     
     this.pushMatrix();

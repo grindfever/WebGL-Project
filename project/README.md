@@ -1,1 +1,21 @@
-# [COPY FROM PREVIOUS TP AND ADJUST]
+# CG 2023/2024
+
+## Group T08G04
+
+## Project Notes
+
+### Sky Sphere
+
+![Screenshot 1](screenshots/project-t08g04-1.png)
+
+### Panorama
+
+![Screenshot 2](screenshots/project-t08g04-2.png)
+
+### Implemented Fov Slider
+
+![Screenshot 3](screenshots/project-t08g04-3.png)
+
+### Flower Garden
+
+![Screenshot 4](screenshots/project-t08g04-4.png)
