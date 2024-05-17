@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRockSet } from "./MyRockSet.js";
+import { MyBee } from "./MyBee.js";
 /**
  * MyScene
  * @constructor
@@ -39,6 +40,9 @@ export class MyScene extends CGFscene {
 
     // MyRockSet
     this.rockSet = new MyRockSet(this, 30);
+
+    // MyBee
+    this.bee = new MyBee(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -112,7 +116,8 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.displayNormals ? this.sphere.enableNormalViz() : this.sphere.disableNormalViz();
     this.appearance1.apply();
-    this.translate(0, 20, 0);
+    this.translate(0, 50, 0);
+    this.scale(10, 10, 10);
     this.sphere.display();
     this.popMatrix();
     
@@ -126,8 +131,16 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
+    this.translate(-10, 0, 0);
+    this.scale(2, 2, 2);
     this.displayNormals ? this.rockSet.enableNormalViz() : this.rockSet.disableNormalViz();
     this.displayRockSet ? this.rockSet.display() : null;
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.displayNormals ? this.bee.enableNormalViz() : this.bee.disableNormalViz();
+    this.translate(0, 15, 0);
+    this.bee.display();
     this.popMatrix();
 
     // Update the camera's field of view
