@@ -48,7 +48,7 @@ export class MyRockSet extends CGFobject {
                 for (let j = 0; j < layerSize; j++) {
                     if (remainingRocks <= 0) return; // Stop if we've placed all rocks
     
-                    let radius = Math.random() * 0.5 + 0.2; // Random radius between 0.2 and 0.7
+                    let radius = 2*(Math.random() * 0.5 + 0.2); // Random radius between 0.2 and 0.7
                     let slices = 16; // Fixed number of slices
                     let stacks = 8; // Fixed number of stacks
                     let rock = new MyRock(this.scene, radius, slices, stacks);
