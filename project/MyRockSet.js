@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from "../lib/CGF.js";
+import { CGFobject, CGFappearance ,CGFtexture} from "../lib/CGF.js";
 import { MyRock } from './MyRock.js';
 
 /**
@@ -19,11 +19,13 @@ export class MyRockSet extends CGFobject {
 
     initAppearance() {
         // Rock appearance
-        this.rockAppearance = new CGFappearance(this.scene); // Pass the scene correctly
-        this.rockAppearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.rockAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.rockAppearance = new CGFappearance(this.scene);
+        this.rockAppearance.setTexture(new CGFtexture(this.scene, 'images/rock.png'));
+        this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
+        this.rockAppearance.setDiffuse(0.6, 0.6, 0.6, 1);
         this.rockAppearance.setSpecular(0.2, 0.2, 0.2, 1);
         this.rockAppearance.setShininess(10.0);
+
     }
 
     initRocks() {
