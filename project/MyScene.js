@@ -140,6 +140,8 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.displayNormals ? this.bee.enableNormalViz() : this.bee.disableNormalViz();
     this.translate(0, 15, 0);
+    let currentTime = Date.now();
+    this.bee.update(currentTime);
     this.bee.display();
     this.popMatrix();
 
