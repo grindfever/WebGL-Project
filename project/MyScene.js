@@ -44,6 +44,9 @@ export class MyScene extends CGFscene {
     // MyBee
     this.bee = new MyBee(this);
 
+    this.setUpdatePeriod(50);
+    this.totalTime = Date.now();
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
@@ -51,6 +54,7 @@ export class MyScene extends CGFscene {
     this.displayRockSet = true;
     this.scaleFactor = 1;
     this.fov = 1;
+    this.speedFactor = 1;
     this.enableTextures(true);
 
     this.appearance = new CGFappearance(this);
@@ -86,6 +90,30 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.4, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  update(t) {
+    let deltaTime = (t - this.totalTime) / 1000;
+    this.checkKeys();
+    this.bee.update(deltaTime);
+  }
+  checkKeys() {
+    if (this.gui.isKeyPressed("KeyW")) {
+      this.bee.accelerate(-0.2 * this.speedFactor); // Accelerate the bee
+    }
+    if (this.gui.isKeyPressed("KeyS")) {
+      this.bee.accelerate(0.2 * this.speedFactor); // Decelerate the bee
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      this.bee.turn(1 * this.speedFactor); // Turn the bee to the right
+    }
+    if (this.gui.isKeyPressed("KeyD")) {
+      this.bee.turn(-1 * this.speedFactor); // Turn the bee to the left
+    }
+    if (this.gui.isKeyPressed("KeyR")) {
+      this.bee.position = [0, 0, 0]; // Reset bee's position
+      this.bee.orientation = 0; // Reset bee's orientation
+      this.bee.velocity = [0, 0, 0]; // Reset bee's velocity
+    }
+  }
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -103,7 +131,6 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
 
     // ---- BEGIN Primitive drawing section
-    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
 
     this.pushMatrix();
     this.appearance.apply();
@@ -139,15 +166,15 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.displayNormals ? this.bee.enableNormalViz() : this.bee.disableNormalViz();
-    this.translate(0, 15, 0);
-    let currentTime = Date.now();
-    this.bee.update(currentTime);
+    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+    this.translate(0, 20, 0);
     this.bee.display();
     this.popMatrix();
 
     // Update the camera's field of view
     this.camera.fov = this.fov;
     
+
     // ---- END Primitive drawing section
   }
 }
