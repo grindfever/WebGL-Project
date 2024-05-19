@@ -5,6 +5,7 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee.js";
+import { MyBeehive } from "./MyBeehive.js";
 /**
  * MyScene
  * @constructor
@@ -44,6 +45,9 @@ export class MyScene extends CGFscene {
     // MyBee
     this.bee = new MyBee(this);
 
+    // MyBeehive
+    this.beehive = new MyBeehive(this);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
@@ -63,6 +67,12 @@ export class MyScene extends CGFscene {
     this.appearance1.setTexture(new CGFtexture(this, 'images/earth.jpg'));
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.appearance1.setShininess(10.0);
+
+    this.beehiveappearance = new CGFappearance(this);
+    this.beehiveappearance.setTexture(new CGFtexture(this, 'images/woodbeehive.jpg'));
+    this.beehiveappearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.beehiveappearance.setShininess(10.0);
+
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -145,6 +155,12 @@ export class MyScene extends CGFscene {
     this.bee.display();
     this.popMatrix();
 
+    this.pushMatrix();
+    this.translate(0, 0, 0);  // Adjust the position as needed
+    this.scale(10, 10, 20);  // Adjust the size as needed
+    this.beehiveappearance.apply();
+    this.beehive.display();
+    this.popMatrix();
     // Update the camera's field of view
     this.camera.fov = this.fov;
     

@@ -2,6 +2,7 @@ import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyStem } from './MyStem.js';
 import { MyReceptacle } from './MyReceptacle.js';
+import { MyPollen } from './MyPollen.js';
 /**
  * MyFlower
  * @constructor
@@ -26,8 +27,8 @@ export class MyFlower extends CGFobject {
             this.stemHeightTotal += this.stemHeight[i];
         }
 
-        let random1 = Math.random();
-        this.rotationAngle = random1 < 0.5 ? 0.5 : random1;
+        this.random1 = Math.random();
+        this.rotationAngle = this.random1 < 0.5 ? 0.5 : this.random1;
 
         let petalTexture = Math.round(5 * Math.random());
         this.petalTexture = petalTexture < 1 ? 1 : petalTexture > 5 ? 5 : petalTexture;
@@ -57,6 +58,7 @@ export class MyFlower extends CGFobject {
         this.stem = new MyStem(scene, this.stemRadius, this.stemCount, this.stemHeight);
         this.petal = new MyPetal(this.scene, this.rotationAngle);
         this.receptacle = new MyReceptacle(scene, this.heartRadius);
+        this.pollen = new MyPollen(scene, 1, 32, 16);
 
         this.stemAppearance = new CGFappearance(scene);
 		this.stemAppearance.setTexture(new CGFtexture(scene, 'images/stem.png'));
@@ -74,6 +76,11 @@ export class MyFlower extends CGFobject {
         this.petalAppearance.setTexture(new CGFtexture(scene, 'images/petal' + this.petalTexture + '.png'));
         this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
         this.petalAppearance.setShininess(10.0);
+
+        this.pollenAppearance = new CGFappearance(scene);
+        this.pollenAppearance.setTexture(new CGFtexture(scene, 'images/pollen.png'));
+        this.pollenAppearance.setTextureWrap('REPEAT', 'REPEAT');
+        this.pollenAppearance.setShininess(10.0);
     }
     display() {
         this.scene.scale(this.outerRadius, this.outerRadius, this.outerRadius);
@@ -88,6 +95,14 @@ export class MyFlower extends CGFobject {
         this.scene.translate(0, this.stemHeightTotal, 0);
         this.receptacleAppearance.apply();
         this.receptacle.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, this.stemHeightTotal + 0.6 * this.heartRadius, 0);
+        this.scene.scale(0.1, 0.1, 0.1);
+        this.scene.rotate(this.rotationAngle, 0, 0, 1);
+        this.pollenAppearance.apply();
+        this.pollen.display();
         this.scene.popMatrix();
 
         for (let i = 1; i <= this.petalCount; i++) {
@@ -110,8 +125,5 @@ export class MyFlower extends CGFobject {
         this.stem.disableNormalViz();
         this.petal.disableNormalViz();
         this.receptacle.disableNormalViz();
-    }
-    updatePetalAngle(angle) {
-        this.petal.updateAngle(angle);
     }
 }
