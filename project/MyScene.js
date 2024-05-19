@@ -171,7 +171,7 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.translate(-10, 0, 0);
-    this.scale(2, 2, 2);
+    this.scale(5, 5, 5);
     this.displayNormals ? this.rockSet.enableNormalViz() : this.rockSet.disableNormalViz();
     this.displayRockSet ? this.rockSet.display() : null;
     this.popMatrix();
@@ -184,8 +184,8 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(0, 0, 0);  // Adjust the position as needed
-    this.scale(10, 10, 20);  // Adjust the size as needed
+    this.translate(-10,this.rockSet.currentLayer*1.25, 0);  // Adjust the position as needed
+    this.scale(5, 5, 5);  // Adjust the size as needed
     this.beehiveappearance.apply();
     this.beehive.display();
     this.popMatrix();

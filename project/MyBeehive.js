@@ -4,6 +4,8 @@ export class MyBeehive extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
+
+        
     }
 
     initBuffers() {
@@ -21,26 +23,26 @@ export class MyBeehive extends CGFobject {
              1, 1, 1,   //6
             -1, 1, 1,  // 7
         ];
-       // Add vertices for internal boards (front and back faces)
-       const numBoards = 5;  // Number of internal boards
-       const boardSpacing = 2 / (numBoards + 1);  // Calculate spacing between boards
-       const boardThickness = 0.05;  // Thickness of the boards
-       for (let i = 1; i <= numBoards; i++) {
-           let x = -1 + i * boardSpacing;
-           this.vertices.push(
-               // Front face
-               x - boardThickness / 2, 0, -1,  // Bottom vertex of front face
-               x - boardThickness / 2, 1, -1,  // Top vertex of front face
-               x + boardThickness / 2, 0, -1,  // Bottom vertex of front face
-               x + boardThickness / 2, 1, -1,  // Top vertex of front face
-               
-               // Back face
-               x - boardThickness / 2, 0, 1,  // Bottom vertex of back face
-               x - boardThickness / 2, 1, 1,  // Top vertex of back face
-               x + boardThickness / 2, 0, 1,  // Bottom vertex of back face
-               x + boardThickness / 2, 1, 1   // Top vertex of back face
-           );
-       }
+      // Add vertices for internal boards (front and back faces)
+      const numBoards = 5;  // Number of internal boards
+      const boardSpacing = 2 / (numBoards + 1);  // Calculate spacing between boards
+      const boardThickness = 0.05;  // Thickness of the boards
+      for (let i = 1; i <= numBoards; i++) {
+          let x = -1 + i * boardSpacing;
+          this.vertices.push(
+              // Front face
+              x - boardThickness / 2, 0, -1,  // Bottom vertex of front face
+              x - boardThickness / 2, 1, -1,  // Top vertex of front face
+              x + boardThickness / 2, 0, -1,  // Bottom vertex of front face
+              x + boardThickness / 2, 1, -1,  // Top vertex of front face
+
+              // Back face
+              x - boardThickness / 2, 0,  1,  // Bottom vertex of back face
+              x - boardThickness / 2, 1,  1,  // Top vertex of back face
+              x + boardThickness / 2, 0,  1,  // Bottom vertex of back face
+              x + boardThickness / 2, 1,  1   // Top vertex of back face
+          );
+      }
 
         // Define indices
         this.indices = [
@@ -90,7 +92,6 @@ export class MyBeehive extends CGFobject {
             baseIndex + 2, baseIndex + 7, baseIndex + 6
         );
     }
-
     // Define indices for the top connecting piece
     for (let i = 0; i < numBoards - 1; i++) {
         let baseIndex = 8 + i * 8 + 1;
@@ -100,20 +101,7 @@ export class MyBeehive extends CGFobject {
         );
     }
 
-    // Add reverse face indices for visibility from both sides
-    for (let i = 0; i < numBoards; i++) {
-        let baseIndex = 8 + i * 8;
-        // Reverse front face
-        this.indices.push(
-            baseIndex + 2, baseIndex + 3, baseIndex + 1,
-            baseIndex + 2, baseIndex + 1, baseIndex
-        );
-        // Reverse back face
-        this.indices.push(
-            baseIndex + 6, baseIndex + 7, baseIndex + 5,
-            baseIndex + 6, baseIndex + 5, baseIndex + 4
-        );
-    }
+   
         // Calculate normals
         this.normals = [
             // Bottom face
@@ -169,7 +157,7 @@ export class MyBeehive extends CGFobject {
             0, 0,  1, 0,  1, 1,  0, 1,
             0, 0,  1, 0,  1, 1,  0, 1,
         ];
-// Add texture coordinates for internal boards
+// Add texture coordinates for internal boards (eye texture)
 for (let i = 0; i < numBoards; i++) {
     this.texCoords.push(
         // Front face
@@ -181,7 +169,6 @@ for (let i = 0; i < numBoards; i++) {
         0, 0,  1, 0,  1, 1,  0, 1
     );
 }
-
         // Create VBOs
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();

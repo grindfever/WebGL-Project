@@ -12,8 +12,10 @@ export class MyRockSet extends CGFobject {
         this.scene = scene;
         this.numRocks = numRocks;
         this.rocks = [];
+        this.currentLayer = 0;
         this.initRocks();
         this.initAppearance();
+        
     }
     initAppearance() {
         // Rock appearance
@@ -26,19 +28,18 @@ export class MyRockSet extends CGFobject {
     }
     initRocks() {
         let remainingRocks = this.numRocks;
-        let currentLayer = 0;
         let totalRocksUsed = 0;
-    
+      
         // Calculate the maximum number of complete layers we can build
         while (true) {
-            const rocksInNextLayer = (currentLayer + 1) ** 2;
+            const rocksInNextLayer = (this.currentLayer + 1) ** 2;
             if (totalRocksUsed + rocksInNextLayer > this.numRocks) break;
             totalRocksUsed += rocksInNextLayer;
-            currentLayer++;
+            this.currentLayer++;
         }
         // Place rocks for each layer
-        for (let layer = 0; layer < currentLayer; layer++) {
-            const layerSize = currentLayer - layer;
+        for (let layer = 0; layer < this.currentLayer; layer++) {
+            const layerSize = this.currentLayer - layer;
             const layerHeight = layer * 0.2;
             for (let i = 0; i < layerSize; i++) {
                 for (let j = 0; j < layerSize; j++) {
