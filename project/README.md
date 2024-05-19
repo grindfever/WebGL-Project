@@ -29,3 +29,7 @@
 ### Rock Pile
 
 ![Screenshot 6](screenshots/project-t08g04-6.png)
+
+### Bee
+
+![Screenshot 7](screenshots/project-t08g04-7.png)
