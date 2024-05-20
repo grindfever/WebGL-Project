@@ -134,25 +134,27 @@ export class MyScene extends CGFscene {
       this.bee.ascend(-0.5 * this.speedFactor);
     }
     if (this.gui.isKeyPressed("KeyR")) {
-      this.bee.position = [0, 0, 0];
+      this.bee.position = [0, 20, 0];
       this.bee.orientation = 0;
       this.bee.velocity = [0, 0, 0];
     }
     if (this.gui.isKeyPressed("KeyF")) {
       if (!this.bee.pollen) {
         if (this.garden.flowers.length > 0) {
+          var closestFlower = this.garden.flowers[0][0];
           var closestFlowerPosition = this.garden.flowersPositions[0][0];
           let closestDistance = Math.sqrt((this.bee.position[0] - closestFlowerPosition[0]) ** 2 + this.bee.position[1] ** 2 + (this.bee.position[2] - closestFlowerPosition[1]) ** 2);
           for (let i = 0; i < this.garden.numRows; i++) {
             for (let j = 0; j < this.garden.numCols; j++) {
               let distance = Math.sqrt((this.bee.position[0] - this.garden.flowersPositions[i][j][0]) ** 2 + this.bee.position[1] ** 2 + (this.bee.position[2] - this.garden.flowersPositions[i][j][1]) ** 2);
               if (distance < closestDistance){
+                closestFlower = this.garden.flowers[i][j];
                 closestFlowerPosition = this.garden.flowersPositions[i][j];
                 closestDistance = distance;
               }
             }
           }
-          this.bee.approachFlower(closestFlowerPosition);
+          this.bee.approachFlower(closestFlowerPosition, closestFlower);
         }
       }
     }
@@ -233,7 +235,6 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.displayNormals ? this.bee.enableNormalViz() : this.bee.disableNormalViz();
     this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-    this.translate(0, 20, 0);
     this.bee.display();
     this.popMatrix();
 

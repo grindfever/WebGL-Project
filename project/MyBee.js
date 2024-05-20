@@ -8,7 +8,7 @@ import { MySphere } from './MySphere.js';
 export class MyBee extends CGFobject {
       constructor(scene) {
             super(scene);
-            this.position = [0, 0, 0];
+            this.position = [0, 20, 0];
             this.orientation = 0;
             this.velocity = [0, 0, 0];
             this.time = 0;
@@ -87,33 +87,27 @@ export class MyBee extends CGFobject {
       ascend(v) {
             this.position[1] += v;
       }
-      approachFlower(flowerPosition) {
-            const speed = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2 + this.velocity[2] ** 2);
+      approachFlower(flowerPosition, flower) {
             this.velocity[0] = flowerPosition[0] - this.position[0];
-            this.velocity[2] = flowerPosition[2] - this.position[2];
-        
+            this.velocity[2] = flowerPosition[1] - this.position[2];
+        console.log(this.velocity);
             if (this.velocity[0] !== 0 && this.velocity[2] !== 0) {
                 this.orientation = Math.atan2(-this.velocity[2], this.velocity[0]);
             }
-    
-            this.velocity = vec3.normalize(this.velocity, this.velocity);
-    
-            this.velocity[0] = this.velocity[0] * speed;
-            this.velocity[1] = 0;
-            this.velocity[2] = this.velocity[2] * speed;
-    
-            if (this.position[1] > flowerPosition[1] + 1) {
-                this.ascend(-1);
-            } else if (this.position[1] < flowerPosition[1]) {
+
+            if (this.position[1] > (flower.stemHeightTotal + 3) * 2) {
+                this.ascend(-1)
+            } else if (this.position[1] < (flower.stemHeightTotal + 3) * 2) {
                 this.ascend(1);
             }
         
             // Check if the bee is close enough to the flower
-            const distanceThreshold = 5;
+            const distanceThreshold = 10;
             const distance = Math.sqrt((this.position[0] - flowerPosition[0]) ** 2 + this.position[1] ** 2 + (this.position[2] - flowerPosition[1]) ** 2);
             if (distance < distanceThreshold) {
-                this.velocity = vec3.fromValues(0, 0, 0);
+                this.velocity = [0, 0, 0];
             }
+            console.log(this.velocity);
       }
       collectPollen(flower) {
             this.pollen = flower.pollen;
