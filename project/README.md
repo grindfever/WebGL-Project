@@ -2,6 +2,11 @@
 
 ## Group T08G04
 
+| Name              | Number    | E-Mail               |
+| ----------------- | --------- | -------------------- |
+| Diogo Santos      | 202009291 | <up202009291@up.pt>  |
+| Miguel Figueiredo | 201706105 | <up201706105@up.pt>  |
+
 ## Project Notes
 
 ### Sky Sphere
@@ -36,8 +41,16 @@
 
 ### Pollen
 
+- The bee will not automatically aproach neither the pollen nor the beehive. The user has to manually move the bee to the pollen or the beehive, unfortunately.
+
 ![Screenshot 8](screenshots/project-t08g04-8.png)
 
 ### Beehive
 
 ![Screenshot 9](screenshots/project-t08g04-9.png)
+
+### Grass
+
+- The grass is not using shaders like it was supposed to. We tried to implement it but we were not able to do it in time.
+
+![Screenshot 10](screenshots/project-t08g04-10.png)

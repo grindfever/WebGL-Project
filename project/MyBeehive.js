@@ -1,5 +1,9 @@
 import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
-import { MyPollen } from './MyPollen.js';
+/**
+ * MyBeehive
+ * @constructor
+ * @param scene - Reference to MyScene object
+ */
 export class MyBeehive extends CGFobject {
     constructor(scene) {
         super(scene);

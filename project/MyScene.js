@@ -77,11 +77,15 @@ export class MyScene extends CGFscene {
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.appearance1.setShininess(10.0);
 
-    this.beehiveappearance = new CGFappearance(this);
-    this.beehiveappearance.setTexture(new CGFtexture(this, 'images/woodbeehive.jpg'));
-    this.beehiveappearance.setTextureWrap('REPEAT', 'REPEAT');
-    this.beehiveappearance.setShininess(10.0);
+    this.beehiveAppearance = new CGFappearance(this);
+    this.beehiveAppearance.setTexture(new CGFtexture(this, 'images/woodbeehive.jpg'));
+    this.beehiveAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.beehiveAppearance.setShininess(10.0);
 
+    this.grassAppearance = new CGFappearance(this);
+    this.grassAppearance.setTexture(new CGFtexture(this, 'images/leaf.png'));
+    this.grassAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.grassAppearance.setShininess(10.0);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -195,10 +199,6 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
-    this.grassField.display();
-    this.popMatrix();
-
-    this.pushMatrix();
     this.appearance.apply();
     this.translate(0, -100, 0);
     this.scale(400, 400, 400);
@@ -242,8 +242,13 @@ export class MyScene extends CGFscene {
     this.scale(5, 5, 5);
     this.beehivePosition = [-30, this.rockSet.currentLayer * 1.25, 0];
     this.displayNormals ? this.rockSet.enableNormalViz() : this.rockSet.disableNormalViz();
-    this.beehiveappearance.apply();
+    this.beehiveAppearance.apply();
     this.beehive.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.grassAppearance.apply();
+    this.grassField.display();
     this.popMatrix();
 
     // Update the camera's field of view

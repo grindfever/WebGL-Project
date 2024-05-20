@@ -1,17 +1,22 @@
-import { CGFobject } from '../lib/CGF.js';
-
+import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
+/**
+ * MyGrass
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param dimension - Dimension of the grass field
+ */
 export class MyGrass extends CGFobject {
     constructor(scene, dimension) {
         super(scene);
         this.dimension = dimension;
         this.initBuffers();
-
     }
     initBuffers() {
         this.vertices = [];
         this.normals = [];
         this.indices = [];
-   
+        this.texCoords = [];
+
         // Generate grass geometry
         const numBlades = 5000; 
         const bladeWidth = 0.15; 
@@ -33,7 +38,6 @@ export class MyGrass extends CGFobject {
                 bladeWidth / 2, 0, 0,
                 0, bladeHeight, 0 
             ];
-
             // Apply random rotation to the vertices
             const rotatedVertices = [];
             for (let j = 0; j < baseVertices.length; j += 3) {
@@ -45,7 +49,6 @@ export class MyGrass extends CGFobject {
                 const newZ = x * Math.sin(angle) + z * Math.cos(angle);
                 rotatedVertices.push(newX, y, newZ);
             }
-
             // Calculate normals for the vertices (assume all normals point upwards)
             const normal = [0, 1, 0];
 
@@ -54,19 +57,15 @@ export class MyGrass extends CGFobject {
                 this.vertices.push(rotatedVertices[j] + posX, rotatedVertices[j + 1] + posY, rotatedVertices[j + 2] + posZ);
                 this.normals.push(...normal);
             }
-
             // Calculate indices for the triangle
             const baseIndex = i * 3;
             this.indices.push(baseIndex, baseIndex + 1, baseIndex + 2);
             this.indices.push(baseIndex+2, baseIndex + 1, baseIndex );
         }
-
         // Create buffers
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-    
-
     update(t) {
         // Update grass animation based on time
         // Implement wind effect to simulate movement
