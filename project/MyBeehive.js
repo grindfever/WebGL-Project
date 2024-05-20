@@ -81,6 +81,7 @@ export class MyBeehive extends CGFobject {
             this.indices.push(
                 baseIndex, baseIndex + 1, baseIndex + 3,
                 baseIndex, baseIndex + 3, baseIndex + 2,
+       
                 // Reverse front face
                 baseIndex + 3, baseIndex + 1, baseIndex,
                 baseIndex + 2, baseIndex + 3, baseIndex
@@ -97,8 +98,12 @@ export class MyBeehive extends CGFobject {
             this.indices.push(
                 baseIndex, baseIndex + 1, baseIndex + 5,
                 baseIndex, baseIndex + 5, baseIndex + 4,
+                baseIndex+5, baseIndex + 1, baseIndex ,
+                baseIndex+4, baseIndex + 5, baseIndex ,
                 baseIndex + 2, baseIndex + 3, baseIndex + 7,
-                baseIndex + 2, baseIndex + 7, baseIndex + 6
+                baseIndex + 2, baseIndex + 7, baseIndex + 6,
+                baseIndex + 7, baseIndex + 3, baseIndex + 2,
+                baseIndex + 6, baseIndex + 7, baseIndex + 2
             );
         }
 
@@ -107,7 +112,9 @@ export class MyBeehive extends CGFobject {
             let baseIndex = 8 + i * 8 + 1;
             this.indices.push(
                 baseIndex, baseIndex + 8, baseIndex + 9,
-                baseIndex, baseIndex + 9, baseIndex + 1
+                baseIndex, baseIndex + 9, baseIndex + 1,
+                baseIndex+9, baseIndex + 8, baseIndex ,
+                baseIndex+1, baseIndex + 9, baseIndex 
             );
         }
    
