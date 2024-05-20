@@ -5,20 +5,18 @@ export class MyGrass extends CGFobject {
         super(scene);
         this.dimension = dimension;
         this.initBuffers();
-        this.scene.gl.enable(this.scene.gl.CULL_FACE);
-this.scene.gl.frontFace(this.scene.gl.CCW); // Ensure counterclockwise winding order is used
+
     }
     initBuffers() {
         this.vertices = [];
         this.normals = [];
         this.indices = [];
-        this.scene.gl.enable(this.scene.gl.CULL_FACE);
-this.scene.gl.frontFace(this.scene.gl.CCW); // Ensure counterclockwise winding order is used
+   
         // Generate grass geometry
-        const numBlades = 5000; // Adjust as needed
-        const bladeWidth = 0.15; // Width of the grass blade at the base
-        const bladeHeight = 1.5; // Height of the grass blade
-        const fieldSize = this.dimension; // Size of the field
+        const numBlades = 5000; 
+        const bladeWidth = 0.15; 
+        const bladeHeight = 1.5; 
+        const fieldSize = this.dimension; 
 
         for (let i = 0; i < numBlades; i++) {
             // Generate random position within the field
@@ -33,7 +31,7 @@ this.scene.gl.frontFace(this.scene.gl.CCW); // Ensure counterclockwise winding o
             const baseVertices = [
                 -bladeWidth / 2, 0, 0,
                 bladeWidth / 2, 0, 0,
-                0, bladeHeight, 0 // Make the blade go up along y-axis
+                0, bladeHeight, 0 
             ];
 
             // Apply random rotation to the vertices
