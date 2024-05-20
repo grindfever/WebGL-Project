@@ -45,13 +45,12 @@ export class MyScene extends CGFscene {
     // MyBee
     this.bee = new MyBee(this);
 
-
     // MyBeehive
     this.beehive = new MyBeehive(this);
+    this.beehivePosition = [0, 0, 0];
 
     this.setUpdatePeriod(50);
     this.totalTime = Date.now();
-
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -109,21 +108,68 @@ export class MyScene extends CGFscene {
   }
   checkKeys() {
     if (this.gui.isKeyPressed("KeyW")) {
-      this.bee.accelerate(-0.2 * this.speedFactor); // Accelerate the bee
+      this.bee.accelerate(-0.01 * this.speedFactor); // Accelerate the bee
     }
     if (this.gui.isKeyPressed("KeyS")) {
-      this.bee.accelerate(0.2 * this.speedFactor); // Decelerate the bee
+      this.bee.accelerate(0.01 * this.speedFactor); // Decelerate the bee
     }
     if (this.gui.isKeyPressed("KeyA")) {
-      this.bee.turn(1 * this.speedFactor); // Turn the bee to the right
+      this.bee.turn(0.5 * this.speedFactor); // Turn the bee to the right
     }
     if (this.gui.isKeyPressed("KeyD")) {
-      this.bee.turn(-1 * this.speedFactor); // Turn the bee to the left
+      this.bee.turn(-0.5 * this.speedFactor); // Turn the bee to the left
+    }
+    if (this.gui.isKeyPressed("Space")) {
+      this.bee.ascend(0.5 * this.speedFactor);
+    }
+    if (this.gui.isKeyPressed("ShiftLeft")) {
+      this.bee.ascend(-0.5 * this.speedFactor);
     }
     if (this.gui.isKeyPressed("KeyR")) {
-      this.bee.position = [0, 0, 0]; // Reset bee's position
-      this.bee.orientation = 0; // Reset bee's orientation
-      this.bee.velocity = [0, 0, 0]; // Reset bee's velocity
+      this.bee.position = [0, 0, 0];
+      this.bee.orientation = 0;
+      this.bee.velocity = [0, 0, 0];
+    }
+    if (this.gui.isKeyPressed("KeyF")) {
+      if (!this.bee.pollen) {
+        if (this.garden.flowers.length > 0) {
+          var closestFlowerPosition = this.garden.flowersPositions[0][0];
+          let closestDistance = Math.sqrt((this.bee.position[0] - closestFlowerPosition[0]) ** 2 + this.bee.position[1] ** 2 + (this.bee.position[2] - closestFlowerPosition[1]) ** 2);
+          for (let i = 0; i < this.garden.numRows; i++) {
+            for (let j = 0; j < this.garden.numCols; j++) {
+              let distance = Math.sqrt((this.bee.position[0] - this.garden.flowersPositions[i][j][0]) ** 2 + this.bee.position[1] ** 2 + (this.bee.position[2] - this.garden.flowersPositions[i][j][1]) ** 2);
+              if (distance < closestDistance){
+                closestFlowerPosition = this.garden.flowersPositions[i][j];
+                closestDistance = distance;
+              }
+            }
+          }
+          this.bee.approachFlower(closestFlowerPosition);
+        }
+      }
+    }
+    if (this.gui.isKeyPressed("KeyP")) {
+      if (!this.bee.pollen) {
+        let closestFlower = null;
+        for (let i = 0; i < this.garden.numRows; i++) {
+          for (let j = 0; j < this.garden.numCols; j++) {
+            let distance = Math.sqrt((this.bee.position[0] - this.garden.flowersPositions[i][j][0]) ** 2 + (this.bee.position[2] - this.garden.flowersPositions[i][j][1]) ** 2);
+            if (distance <= 5) {
+              closestFlower = this.garden.flowers[i][j];
+              break;
+            }
+          }
+          if (closestFlower != null) {
+            break;
+          }
+        }
+        if (closestFlower != null && closestFlower.pollen) {
+          this.bee.collectPollen(closestFlower);
+        }
+      }
+    }
+    if (this.gui.isKeyPressed("KeyO")) {
+      this.bee.hiveDropPollen(this.beehive, this.beehivePosition);
     }
   }
   display() {
@@ -170,7 +216,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(-10, 0, 0);
+    this.translate(-30, 0, 0);
     this.scale(5, 5, 5);
     this.displayNormals ? this.rockSet.enableNormalViz() : this.rockSet.disableNormalViz();
     this.displayRockSet ? this.rockSet.display() : null;
@@ -184,14 +230,16 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(-10,this.rockSet.currentLayer*1.25, 0);  // Adjust the position as needed
-    this.scale(5, 5, 5);  // Adjust the size as needed
+    this.translate(-30, this.rockSet.currentLayer * 1.25, 0);
+    this.scale(5, 5, 5);
+    this.beehivePosition = [-30, this.rockSet.currentLayer * 1.25, 0];
+    this.displayNormals ? this.rockSet.enableNormalViz() : this.rockSet.disableNormalViz();
     this.beehiveappearance.apply();
     this.beehive.display();
     this.popMatrix();
+
     // Update the camera's field of view
     this.camera.fov = this.fov;
-    
 
     // ---- END Primitive drawing section
   }
