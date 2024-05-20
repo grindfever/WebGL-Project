@@ -6,6 +6,7 @@ import { MyGarden } from "./MyGarden.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee.js";
 import { MyBeehive } from "./MyBeehive.js";
+import { MyGrass} from "./MyGrass.js";
 /**
  * MyScene
  * @constructor
@@ -45,9 +46,11 @@ export class MyScene extends CGFscene {
     // MyBee
     this.bee = new MyBee(this);
 
-
     // MyBeehive
     this.beehive = new MyBeehive(this);
+
+    // MyGrass
+    this.grassField = new MyGrass(this, 50); // 50x50 grass field 
 
     this.setUpdatePeriod(50);
     this.totalTime = Date.now();
@@ -145,6 +148,10 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
+    this.grassField.display();
+    this.popMatrix();
+
+    this.pushMatrix();
     this.appearance.apply();
     this.translate(0, -100, 0);
     this.scale(400, 400, 400);
@@ -189,6 +196,7 @@ export class MyScene extends CGFscene {
     this.beehiveappearance.apply();
     this.beehive.display();
     this.popMatrix();
+
     // Update the camera's field of view
     this.camera.fov = this.fov;
     
