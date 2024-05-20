@@ -11,7 +11,8 @@ export class MyBee extends CGFobject {
             this.position = [0, 0, 0];
             this.orientation = 0;
             this.velocity = [0, 0, 0];
-            this.time = 0;            
+            this.time = 0;
+            this.pollen = null;
             this.init(scene);
       }
       init(scene) {
@@ -68,12 +69,10 @@ export class MyBee extends CGFobject {
             }
 
             let norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2 + this.velocity[2] ** 2);
-            // Update velocity direction
             this.velocity[0] = Math.cos(-this.orientation) * norm;
             this.velocity[2] = Math.sin(-this.orientation) * norm;
       }
       accelerate(v) {
-            console.log(v);
             let norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2 + this.velocity[2] ** 2);
             if (norm - v >= 0) {
                   this.velocity[0] = this.velocity[0] - Math.cos(-this.orientation) * v;
@@ -84,7 +83,68 @@ export class MyBee extends CGFobject {
                   this.velocity[1] = 0;
                   this.velocity[2] = 0;
             }
-            console.log(norm);
+      }
+      ascend(v) {
+            this.position[1] += v;
+      }
+      approachFlower(flowerPosition) {
+            const speed = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2 + this.velocity[2] ** 2);
+            this.velocity[0] = flowerPosition[0] - this.position[0];
+            this.velocity[2] = flowerPosition[2] - this.position[2];
+        
+            if (this.velocity[0] !== 0 && this.velocity[2] !== 0) {
+                this.orientation = Math.atan2(-this.velocity[2], this.velocity[0]);
+            }
+    
+            this.velocity = vec3.normalize(this.velocity, this.velocity);
+    
+            this.velocity[0] = this.velocity[0] * speed;
+            this.velocity[1] = 0;
+            this.velocity[2] = this.velocity[2] * speed;
+    
+            if (this.position[1] > flowerPosition[1] + 1) {
+                this.ascend(-1);
+            } else if (this.position[1] < flowerPosition[1]) {
+                this.ascend(1);
+            }
+        
+            // Check if the bee is close enough to the flower
+            const distanceThreshold = 5;
+            const distance = Math.sqrt((this.position[0] - flowerPosition[0]) ** 2 + this.position[1] ** 2 + (this.position[2] - flowerPosition[1]) ** 2);
+            if (distance < distanceThreshold) {
+                this.velocity = vec3.fromValues(0, 0, 0);
+            }
+      }
+      collectPollen(flower) {
+            this.pollen = flower.pollen;
+            flower.pollen = null;
+      }
+      hiveDropPollen(hive, hivePosition) {
+            if (this.pollen) {
+                  const speed = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2 + this.velocity[2] ** 2);
+                  this.velocity[0] = hivePosition[0] - this.position[0];
+                  this.velocity[1] = hivePosition[1] - this.position[1];
+                  this.velocity[2] = hivePosition[2] - this.position[2];
+      
+                  if (this.velocity[0] !== 0 && this.velocity[2] !== 0) {
+                      this.orientation = Math.atan2(-this.velocity[2], this.velocity[0]);
+                  }
+      
+                  this.velocity = vec3.normalize(this.velocity, this.velocity);
+                  this.velocity[0] = this.velocity[0] * speed;
+                  this.velocity[1] = this.velocity[1] * speed;
+                  this.velocity[2] = this.velocity[2] * speed;
+      
+                  // Check if the bee is close enough to the hive
+                  const distanceThreshold = 30;
+                  const distance = Math.sqrt((this.position[0] - hivePosition[0]) ** 2 + (this.position[1]  - hivePosition[1]) ** 2 + (this.position[2] - hivePosition[1]) ** 2);
+                  if (distance < distanceThreshold) {
+                      hive.addPollen(this.pollen);
+                      this.pollen = null;
+                      this.velocity = vec3.fromValues(0, 0, 0);
+                  }
+            }
+      
       }
       display() {
             this.scene.translate(0, Math.sin(this.time * 2 * Math.PI) * 0.5, 0);
@@ -186,6 +246,14 @@ export class MyBee extends CGFobject {
             this.scene.translate(0, 0, 1);
             this.leg.display();
             this.scene.popMatrix();
+
+            if (this.pollen) {
+                this.scene.pushMatrix();
+                this.scene.translate(0, -2, 0);
+                this.scene.scale(0.5, 0.5, 0.5);
+                this.pollen.display();
+                this.scene.popMatrix();
+            }
 
             this.scene.pushMatrix(); // Back right leg
             this.scene.rotate(Math.PI/6, 0, -1, 0);

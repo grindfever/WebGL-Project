@@ -21,6 +21,7 @@ export class MyFlower extends CGFobject {
         this.stemCount = Math.round(2 * Math.random()) + 1;
         this.stemHeight = [];
         this.stemHeightTotal = 0;
+        
         for (let i = 0; i < this.stemCount; i++) {
             let random1 = Math.random();
             this.stemHeight[i] = random1 * 2 < 1 ? 1 : random1 * 2 > 1.5 ? 1.5 : random1 * 2;
@@ -97,13 +98,15 @@ export class MyFlower extends CGFobject {
         this.receptacle.display();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        this.scene.translate(0, this.stemHeightTotal + 0.6 * this.heartRadius, 0);
-        this.scene.scale(0.1, 0.1, 0.1);
-        this.scene.rotate(this.rotationAngle, 0, 0, 1);
-        this.pollenAppearance.apply();
-        this.pollen.display();
-        this.scene.popMatrix();
+        if (this.pollen) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, this.stemHeightTotal + 0.6 * this.heartRadius, 0);
+            this.scene.scale(0.1, 0.1, 0.1);
+            this.scene.rotate(this.rotationAngle, 0, 0, 1);
+            this.pollenAppearance.apply();
+            this.pollen.display();
+            this.scene.popMatrix();
+        }
 
         for (let i = 1; i <= this.petalCount; i++) {
             this.scene.pushMatrix();
